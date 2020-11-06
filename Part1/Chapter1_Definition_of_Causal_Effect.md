@@ -5,7 +5,7 @@ Causal effect for individual i: <img src="https://render.githubusercontent.com/r
 Individual causal effects are defined as a contrast of the values of counterfactual outcomes, but only one of those outcomes is observed for each individual– the one corresponding to the treatment value actually experienced by the individual. All other counterfactual outcomes remain unobserved. Because of missing data, individual effects cannot be identified, that is, they cannot be expressed as a function of the observed data
 
 Consistency:
-An individual with observed treatment A equal to a, has observed outcome Y equal to his counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y_{i}^{a=1} \neq Y{a}">, which referred to as consistency
+An individual with observed treatment A equal to a, has observed outcome Y equal to his counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y = Y^{a}">, which referred to as consistency.
 
 #### 1.2 Average causal effects
 Average causal effect in population: <img src="https://render.githubusercontent.com/render/math?math=E[Y_{i}^{a=1}] \neq E[Y_{i}^{a=0}]">
