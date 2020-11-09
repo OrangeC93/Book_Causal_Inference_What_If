@@ -19,3 +19,6 @@ For example: the investigators used a random procedure to assign hearts (A = 1) 
 - <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|L=0, A=1]= Pr[Y^{a=1}|L=0]=1/4"> and <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|L=0, A=0]= Pr[Y^{a=0}|L=0]=1/4">
 - <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|L=1, A=1]= Pr[Y^{a=1}|L=1]=2/3"> and <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|L=1, A=0]= Pr[Y^{a=0}|L=1]=2/3">
 - Therefore  <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=1}=1]"> = 1/4 * 0.4+2/3 * 0.6, same for <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=0}=1]">, now that we can compute the causal risk ratio.
+
+## 2.4 Inverse probability weighting
+both standardization and IP weighting can be viewed as procedures to build a new tree in which all individuals receive treatment a. Each method uses a different set of the probabilities to build the counterfactual tree: IP weighting uses the conditional probability of treatment A given the covariate L, standardization uses the probability of the covariate L and the conditional probability of outcome Y given A and L.
