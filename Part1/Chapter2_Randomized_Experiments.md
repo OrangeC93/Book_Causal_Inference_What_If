@@ -29,5 +29,5 @@ The two trees are a simulation of what would have happened had all individuals i
 <img src=/img/ip_weighted2.png width="40%" height="50%">
 Below shows the entire pseudo-population. Under conditional exchangeability in the original population, the treated and the untreated are (unconditionally) exchangeable in the pseudo-population because the L is independent of A.
 
-<img src=/img/ip_weighted.png width="40%" height="50%">
+<img src=/img/ip_weighted.png width="30%" height="40%">
 Both standardization and IP weighting can be viewed as procedures to build a new tree in which all individuals receive treatment a. Each method uses a different set of the probabilities to build the counterfactual tree: IP weighting uses the conditional probability of treatment A given the covariate L, standardization uses the probability of the covariate L and the conditional probability of outcome Y given A and L.
