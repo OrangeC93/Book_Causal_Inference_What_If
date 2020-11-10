@@ -17,3 +17,5 @@ Note: The crucial question for the observational study is whether L is the only 
 We must ensure that there is a probability greater than zero–a positive probability–of being assigned to each of the treatment levels. This is the positivity condition.
 
 ## 3.4 Consistency: First, define the counterfactual outcome
+## 3.5 Consistency: Second, link counterfactuals to the observed data
+## 3.6 The target trial
