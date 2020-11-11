@@ -30,3 +30,4 @@ The extrapolation of causal effects computed in one population to a second popul
 2. Identify the groups of individuals that would benefit most from an intervention.
 3. Help understand the biological, social or other mechanisms leading to the outcome.
 
+## 4.4 Stratification as a form of adjustment
