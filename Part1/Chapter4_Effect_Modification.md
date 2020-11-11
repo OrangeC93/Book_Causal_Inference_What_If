@@ -31,4 +31,19 @@ The extrapolation of causal effects computed in one population to a second popul
 3. Help understand the biological, social or other mechanisms leading to the outcome.
 
 ## 4.4 Stratification as a form of adjustment
-But stratification is not always used to identify effect modification by V . In practice stratification is often used as an alternative to standardization (and IP weighting) to adjust for L. 
+But stratification is not always used to identify effect modification by V . In practice stratification is often used as an alternative to standardization (and IP weighting) to adjust for L. Calculate the risk ratios 
+<img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|A=1, L=l] / Pr[Y=1|A=0, L=l]"> for both l = 0 and l = 1 (Under conditional exchagebility given L, the risk ratio in the subset L=l measures the average causal effect in the subste L=l), which are called *conditinal effect measure*
+
+Note: Each of them quantifies the average causal effect in a nonoverlapping subset of the population but, in general, none of them quantifies the average causal effect in the entire population. Therefore, we did not consider stratification when describing methods to compute the average causal effect of treatment in the population in Chapter 2. Rather, we focused on standardization and IP weighting.
+
+ 
+## 4.5 Matching as another form of adjustment
+Matching is another adjustment method. The goal of matching is to construct a subset of the population in which the variables L have the same distribution in both the treated and the untreated.
+- Often one chooses the group with fewer individuals (the untreated in our example) and uses the other group (the treated in our example) to find their matches.
+- Also, matching needs not be one-to-one (matching pairs), but it can be one-to-many (matching sets).
+
+## 4.6 Effect modification and adjustment methods
+- Compute marginal or conditional effect: standardization and IP weighting
+- Compute conditional effects in certain subsets of population: Stratification/restriction and Matching
+
+All four approaches require exchangeability and positivity but the subsets of the population in which these conditions need to hold depend on the causal effect of interest.
