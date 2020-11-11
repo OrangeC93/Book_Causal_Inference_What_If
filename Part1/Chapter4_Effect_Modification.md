@@ -20,7 +20,13 @@ Example: What is the average causal effect of A on Y in Greek(V=1)? And in Roman
 - If one would then find effect modification by nationality. An intervention to improve the quality of heart surgery in Rome could eliminate the modification of the causal effect by passport-defined nationality. Whenever we want to emphasize this distinction, we will refer to nationality as a **surrogate effect modifier**, and to quality of care as a **causal effect modifier**. 
 - However, our use of the term effect modification by V does not necessarily imply that V plays a causal role in the modification of the effect.
 
+## 4.3 Why care about effect modification
+1. The average causal effect in a population depends on the distribution of individual causal effects in the population. There is generally no such a thing as “the average causal effect of treatment A on outcome Y (period)”, but “the average causal effect of treatment A on outcome Y in a population with a particular mix of causal effect modifiers.”
 
+```
+The extrapolation of causal effects computed in one population to a second population is referred to as transportability of causal inferences across populaitions.
+```
 
-
+2. Identify the groups of individuals that would benefit most from an intervention.
+3. Help understand the biological, social or other mechanisms leading to the outcome.
 
