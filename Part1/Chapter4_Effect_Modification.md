@@ -31,3 +31,4 @@ The extrapolation of causal effects computed in one population to a second popul
 3. Help understand the biological, social or other mechanisms leading to the outcome.
 
 ## 4.4 Stratification as a form of adjustment
+But stratification is not always used to identify effect modification by V . In practice stratification is often used as an alternative to standardization (and IP weighting) to adjust for L. 
