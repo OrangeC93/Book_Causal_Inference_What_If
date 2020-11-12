@@ -14,6 +14,7 @@ Note: The difference beween interaction and effect modification
 The meaning of the term “interaction” is clarified by the classification of individuals according to their counterfactual response types (More details in book).
 
 ## 5.4 Sufficient causes
+![image](/img/sufficient-component causes.png)
 ## 5.5 Sufficient cause interaction
 This second concept of interaction is not based on counterfactual contrasts but rather on sufficient-component causes, and thus we refer to it as interaction within the sufficient-component-cause framework or, for brevity, **sufficient cause interaction**.
 
