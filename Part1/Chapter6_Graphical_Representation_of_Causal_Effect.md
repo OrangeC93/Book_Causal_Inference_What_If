@@ -28,3 +28,6 @@ Case3: Suppose that the investigators, who are interested in estimating the effe
 
 Case4: A->L, Y->L, L->[C]
 - A and Y are also associated within levels of C because C is a common effect of A and Y
+
+
+There is another possible source of association between two variables that we have not discussed yet: chance or random variability. Unlike the structural reasons for an association between two variables–causal effect of one on the other, shared common causes, conditioning on common effects–random variability results in chance associations that become smaller when the size of the study population increases.
