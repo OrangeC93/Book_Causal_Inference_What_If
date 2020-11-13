@@ -13,4 +13,4 @@ A defining property of causal DAGs is that, conditional on its direct causes, an
 
 In summary, two variables are (marginally) associated if one causes the other, or if they share common causes. Otherwise they will be (marginally) independent. 
 
-## Causal diagrams and conditional independence
+## 6.3 Causal diagrams and conditional independence
