@@ -14,3 +14,17 @@ A defining property of causal DAGs is that, conditional on its direct causes, an
 In summary, two variables are (marginally) associated if one causes the other, or if they share common causes. Otherwise they will be (marginally) independent. 
 
 ## 6.3 Causal diagrams and conditional independence
+Case1: Aspirin A affects the risk of heart disease Y because it reduces platelet aggregation B.
+- A->[B]->Y
+- Even though A and Y are marginally associated, A and Y are conditionally independent (unassociated) given B because the risk of heart disease is the same in the treated and the untreated within levels of B
+
+Case2: Suppose the investigator restricts the study to nonsmokers (L = 1)
+- [L]->A and [L]->Y
+- Even though A and Y are marginally associated, A and Y are conditionally independent given L because the risk of lung cancer is the same in the treated and the untreated within levels of L:
+
+Case3: Suppose that the investigators, who are interested in estimating the effect of haplotype A on smoking status Y , restricted the study population to individuals with heart disease (L = 1).
+- A->[L] and Y->[L]
+- A and Y are inversely associated conditionally on L = 1.
+
+Case4: A->L, Y->L, L->[C]
+- A and Y are also associated within levels of C because C is a common effect of A and Y
