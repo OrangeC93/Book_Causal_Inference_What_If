@@ -40,7 +40,7 @@ The first component of consistency–well-defined interventions–means that the
 ```
 ## A structural classification of bias
 
-- One source of bias is the lack of exchangeability between the treated and the untreated. Causes for generating the lcak of exchangeability:
+- One source of bias is the lack of exchangeability between the treated and the untreated. <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=1}=1] - Pr[Y^{a=0}=1] \neq Pr[Y=1|A=1] - Pr[Y=1|A=0]">Causes for generating the lcak of exchangeability:
   - Common causes: When the treatment and outcome share a common cause, the association measure generally differs from the effect measure. Many epidemiologists use the term **confounding** to refer to this bias.
   - Conditioning on common effects: This structure is the source of bias that many epidemiologists refer to as selection bias.
 
