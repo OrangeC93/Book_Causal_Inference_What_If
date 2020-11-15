@@ -38,10 +38,18 @@ Positivity is roughly translated into graph language as the condition that the a
 
 The first component of consistency–well-defined interventions–means that the arrow from treatment A to outcome Y corresponds to a possibly hypothetical but relatively unambiguous intervention.
 ```
-## A structural classification of bias
+## 6.5 A structural classification of bias
 
 - One source of bias is the lack of exchangeability between the treated and the untreated. <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=1}=1] - Pr[Y^{a=0}=1] \neq Pr[Y=1|A=1] - Pr[Y=1|A=0]">Causes for generating the lcak of exchangeability:
   - Common causes: When the treatment and outcome share a common cause, the association measure generally differs from the effect measure. Many epidemiologists use the term **confounding** to refer to this bias.
   - Conditioning on common effects: This structure is the source of bias that many epidemiologists refer to as selection bias.
 
 - Another source of bias: measurement error.
+
+## 6.6 The structure of effect modification
+Causal diagrams are **less helpful** to illustrate the concept of effect modification. Causal diagram in does not necessarily indicate the presence of effect modification by V.
+- The causal effect of treatment A on mortality Y is in the same direction (i.e., harmful or beneficial) in both stratum V = 1 and stratum V = 0.
+- The direction of the causal effect of treatment A on mortality Y in stratum V = 1 is the opposite of that in stratum V = 0 (i.e., there is qualitative effect modification).
+- Treatment A has a causal effect on Y in one stratum of V but no causal effect in the other stratum, e.g., A only kills individuals with V = 0.
+
+The variable s is a surrogate effect modifier whereas the variable V is a causal effect modifier. Surrogate effect modifiers can be associated with the causal effect modifier by structures including common causes, conditioning on common effects, or cause and effect(see examples in figure 6.13, 6.14, 6.15).
