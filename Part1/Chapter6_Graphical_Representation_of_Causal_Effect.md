@@ -38,3 +38,10 @@ Positivity is roughly translated into graph language as the condition that the a
 
 The first component of consistency–well-defined interventions–means that the arrow from treatment A to outcome Y corresponds to a possibly hypothetical but relatively unambiguous intervention.
 ```
+## A structural classification of bias
+
+One source of bias is the lack of exchangeability between the treated and the untreated. Causes for generating the lcak of exchangeability:
+- Common causes: When the treatment and outcome share a common cause, the association measure generally differs from the effect measure. Many epidemiologists use the term **confounding** to refer to this bias.
+- Conditioning on common effects: This structure is the source of bias that many epidemiologists refer to as selection bias.
+
+Another source of bias: measurement error.
