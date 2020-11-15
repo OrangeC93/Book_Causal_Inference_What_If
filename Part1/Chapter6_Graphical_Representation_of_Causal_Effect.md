@@ -31,3 +31,10 @@ Case4: A->L, Y->L, L->[C]
 
 
 There is another possible source of association between two variables that we have not discussed yet: chance or random variability. Unlike the structural reasons for an association between two variables–causal effect of one on the other, shared common causes, conditioning on common effects–random variability results in chance associations that become smaller when the size of the study population increases.
+
+## 6.4 Positivity and consistency in causal diagrams
+```
+Positivity is roughly translated into graph language as the condition that the arrows from the nodes L to the treatment node A are not deterministic.
+
+The first component of consistency–well-defined interventions–means that the arrow from treatment A to outcome Y corresponds to a possibly hypothetical but relatively unambiguous intervention.
+```
