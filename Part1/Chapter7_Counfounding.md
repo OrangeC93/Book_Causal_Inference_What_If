@@ -47,3 +47,5 @@ A solution to the bias in 7.5 would be to measure either (1) A vairable L1 betwe
 
 ## 7.4 Counfounding and confounders
 
+## 7.5 Single-world intervention graphs
+## 7.6 Counfounding adjustment
