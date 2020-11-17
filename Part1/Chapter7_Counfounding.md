@@ -46,6 +46,14 @@ Conditioning on L would block that backdoor path but would simultaneously open a
 A solution to the bias in 7.5 would be to measure either (1) A vairable L1 between U1 and either A or Y or (2) A vairable L1 between U1 and either A or Y. In the first case we would have conditional exchangeability given L1. In the second case we would have conditional exchangeability given both L2 and L.
 
 ## 7.4 Counfounding and confounders
+The traditional approach misleads investigators into adjusting for variables when adjustment is harmful. In contrast, a structural approach starts by explicitly identifying the sources of confounding and then identifies a sufficient set of adjustment variables.
+
+A structural approach to confounding emphasizes that causal inference from observational data requires a priori causal knowledge. Of course, there is no guarantee that the researchers’ causal DAG is correct and thus it is possible that, contrary to the researchers’ beliefs, their chosen set of adjustment variables fails to eliminate confounding or introduces selection bias. However, the structural approach to confounding has two important advantages.
+- First, it prevents inconsistencies between beliefs and actions.
+- Second, the researchers’ assumptions about confounding become explicit and therefore can be explicitly criticized by other investigators.
+
 
 ## 7.5 Single-world intervention graphs
+A SWIG is a graph that represents a counterfactual world created by **a single intervention**. In contrast, the variables on a standard causal diagram represent **the actual world**. 
+
 ## 7.6 Counfounding adjustment
