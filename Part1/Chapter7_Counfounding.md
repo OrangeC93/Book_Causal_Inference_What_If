@@ -54,11 +54,22 @@ A structural approach to confounding emphasizes that causal inference from obser
 
 
 ## 7.5 Single-world intervention graphs
-A SWIG is a graph that represents a counterfactual world created by **a single intervention**. In contrast, the variables on a standard causal diagram represent **the actual world**. 
+Why we need SWIG:
+There appears to be no obvious relationship between counterfactual independence and the absence of backdoor paths because counterfactuals are not included as variables on causal diagrams. Since graphs are so useful for evaluating independencies via d-separation, it seems natural to want to construct graphs that include counterfactuals as nodes, so that unconditional and conditional exchangeability can be directly read off the graph.
 
-On the SWIG,  is dseparated from A given L if and **only if** L is a non-descendant of A that blocks all backdoor paths from A to Y
+A SWIG is a graph that represents a counterfactual world created by **a single intervention**. In contrast, the variables on a standard causal diagram represent **the actual world**. On the SWIG,  <img src="https://render.githubusercontent.com/render/math?math=Y^{a=1}">is dseparated from A given L if and **only if** L is a non-descendant of A that blocks all backdoor paths from A to Y
 
-(Page 103). 
+
 ![image](/img/swig_example.png)
 
 ## 7.6 Counfounding adjustment
+In the absence of randomization, causal inference relies on the uncheckable assumption that we have measured a set of variables L that is a sufficient set for confounding adjustment, that is, a set of non-descendants of treatment A that includes enough variables to block all backdoor paths from A to Y . Under this assumption of conditional exchangeability given L, standardization and IP weighting can be used to compute the average causal effect in the population, BUT these methods are not the only ways. Methods that adjust for confounders L can be classified into two broad categories:
+- G-methods: standardization, IP weighting, and g-estimation. These methods (the ‘g’ stands for ‘generalized.’) exploit conditional exchangeability given L to estimate the causal effect of A on Y **in the entire population or in any subset of the population**.
+  - IP weighting achieves this by creating a pseudo-population in which treatment A is independent of the measured confounders L, that is, by “deleting” the arrow from L to A, which has obvious advantages when dealing with time-varing treatment, however stratification method may result in selection bias.
+  - Stratification-based methods rather compute the conditional effect in a subset of the observed population, which is represented by adding a selection box. 
+  - However, methods like difference in difference, instrumental variable estimation adn the front door criterion do not require conditional exchangeability, they require alternative assumptions that, like conditional exchangeability, are unvertifiable. Therefore, in practice, the validity of the resulting effect estimates is not guaranteed. Also, these methods cannot be generally employed for causal questions involving time-varying treatments. As a result, these methods are disqualified from consideration for many research problems.
+- Stratification-based methods: Stratification (including restriction) and matching. These methods exploit conditional exchangeability given L to estimate the association between A and Y **in subsets defined by L**.
+
+Note: Achieving conditional exchangeability may be an unrealistic goal in many observational studies but, as discussed in Section 3.2, expert knowledge about the causal structure can be used to get as close as possible to that goal. Therefore, in observational studies, investigators measure many variables L; (which are non-descendants of treatment) in an attempt to ensure that the treated and the untreated are conditionally exchangeable. The hope is that, even though common causes may exist (confounding), the measured variables L are sufficient to block all backdoor paths (no unmeasured confounding). However, there is no guarantee that this attempt will be successful, which makes causal inference from observational data a risky undertaking.To appropriately criticize study, the critic needs to engage in a truly scientific conversation.
+
+
