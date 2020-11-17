@@ -56,4 +56,9 @@ A structural approach to confounding emphasizes that causal inference from obser
 ## 7.5 Single-world intervention graphs
 A SWIG is a graph that represents a counterfactual world created by **a single intervention**. In contrast, the variables on a standard causal diagram represent **the actual world**. 
 
+On the SWIG,  is dseparated from A given L if and **only if** L is a non-descendant of A that blocks all backdoor paths from A to Y
+
+(Page 103). 
+![image](/img/swig_example.png)
+
 ## 7.6 Counfounding adjustment
