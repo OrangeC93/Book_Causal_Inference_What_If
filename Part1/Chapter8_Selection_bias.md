@@ -20,3 +20,5 @@ Examples:
 These examples show that selection bias may occur in retrospective studies as well as prospective studies. 
 
 ⭐ Hence a key difference between confounding and selection bias: ✅ randomization protects against confounding, but not against ❌ selection bias when the selection occurs **after** the randomization. On the other hand, no bias arises in randomized experiments from selection into the study before treatment is assigned. 
+
+## 8.3 Selection bias and confounding
