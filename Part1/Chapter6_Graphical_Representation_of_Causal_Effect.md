@@ -1,7 +1,8 @@
 ## 6.1 Causal Diagrams
 DAGs: directed acyclic graphs, directrd imply a direction, acyclic means there's no cycle that a vairable cannot cause itself, either directly or through another variable.
 ```
-A defining property of causal DAGs is that, conditional on its direct causes, any variable on the DAG is independent of any other variable for which it is not a cause. This
+A defining property of causal DAGs is that:
+Conditional on its direct causes, any variable on the DAG is independent of any other variable for which it is not a cause. 
 
 ```
 
