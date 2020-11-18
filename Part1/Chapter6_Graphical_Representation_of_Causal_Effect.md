@@ -7,10 +7,11 @@ Conditional on its direct causes, any variable on the DAG is independent of any 
 ```
 
 ## 6.2 Causal diagrams and marginal independence
-- L->A, L->Y:  A and Y are accociated but not have a causal inference
-- A->Y: A and Y are accociated and also has a causal inference
-- A->L and Y->L: The common effect L is referred to as a collider because two arrowheads collide on this node, A and Y are not accociated and do not have a causal inference
-
+- A->Y: A and Y are accociated ✅ and has a causal inference✅
+- Common cause: L->A, L->Y
+  - A and Y are accociated ✅ but not have a causal inference ❌
+- Common effect:A->L and Y->L
+  - The common effect L is referred to as a collider because two arrowheads collide on this node, A and Y are not accociated ❌ and do not have a causal inference ❌, but if we conditioning on L, A and Y are associated (we'll talk about it later)
 
 In summary, two variables are (marginally) associated if one causes the other, or if they share common causes. Otherwise they will be (marginally) independent. 
 
