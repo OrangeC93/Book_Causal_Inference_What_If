@@ -7,3 +7,5 @@ Examples:
 - (8.1) A->Y->[C], A->[C]
   - Conditional on C will result in an assocation between A and Y. But due to **selection bias**, the association risk <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|A=1, C=0]/Pr[Y=1|A=0, C=0]">does not equal the risk ratio <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=1}=1]/Pr[Y^{a=0}=1]">. If the analysis doesn't conditioned on the common effect (collider) C, then the only open path between A and Y would be due to the causal effect of A on Y, that is the assciation would be causation.
 - (8.2) A->Y->C->[S], A->C, conditioning on a varaible S affected by the collider C also opens the path A->C<-Y.
+- Both (8.1) and (8.2) depict examples of selection bias in which the bias arises because of conditioning on a common effect of treatment and outcome:(1) This bias arises regardless of whether there's an arrow from A to Y.
+- More variance structure of selection bias (8.3 - 8.6)
