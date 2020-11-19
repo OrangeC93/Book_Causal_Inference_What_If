@@ -22,3 +22,11 @@ These examples show that selection bias may occur in retrospective studies as we
 ⭐ Hence a key difference between confounding and selection bias: ✅ randomization protects against confounding, but not against ❌ selection bias when the selection occurs **after** the randomization. On the other hand, no bias arises in randomized experiments from selection into the study before treatment is assigned. 
 
 ## 8.3 Selection bias and confounding
+In this and the previous chapter, we describe two reasons why the treated and the untreated may not be exchangeable: (1) Confounding: the presence of common causes of treatment and outcome, and (2) Selection Bias: conditioning on common effects of treatment and outcome (or causes of them). 
+
+Although some statistians use selection bias for both reasons, but we still recommend adopting a structural approach of classification of sources of non-exchangeability:
+- The structure of the problem frequently guides the choice of analytical methods to reduce or avoid the bias.
+- It could help study design.
+- Selection bias resulting from conditioning on pre-treatment variables (e.g., being a firefighter) could explain why certain variables behave as “confounders” in some studies but not others.
+
+## Selection bias and censoring
