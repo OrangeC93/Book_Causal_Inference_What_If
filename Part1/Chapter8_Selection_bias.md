@@ -29,4 +29,11 @@ Although some statistians use selection bias for both reasons, but we still reco
 - It could help study design.
 - Selection bias resulting from conditioning on pre-treatment variables (e.g., being a firefighter) could explain why certain variables behave as “confounders” in some studies but not others.
 
-## Selection bias and censoring
+## 8.4 Selection bias and censoring
+(8.3) Y<-U->L->[C]<-A: is an example of selection bias that results from conditioning on the censoring variable C, which is a common effect of treatment A and a cause U of the outcome Y , rather than of the outcome itself. According to the rules of d-separation, conditioning on the collider C opens the path A->C<-L<-U->Y and thus association flows from treatment A to outcome Y.
+
+If the censoring C is now viewed as a treatment, the goal of the analysis is to compute the causal effect of a joint intervention on A and C, To eliminate the selection bias for the effect of treatment A, we need to adjust for confounding for the effect of the treatment C.
+
+## 8.5 How to adjust for selection bias
+
+
