@@ -36,4 +36,4 @@ If the censoring C is now viewed as a treatment, the goal of the analysis is to 
 
 ## 8.5 How to adjust for selection bias
 In the previous chapter, we have described IP weights to adjust for counfounding, <img src="https://render.githubusercontent.com/render/math?math=W^A = 1/f(A/L)"> and selection bias <img src="https://render.githubusercontent.com/render/math?math=W^C = 1/Pr(C=0|A,L)">. When both confounding and selection bias exist, the product weight <img src="https://render.githubusercontent.com/render/math?math=W^A"> <img src="https://render.githubusercontent.com/render/math?math=W^C"> can be used to adjust simultaneously for both biases under assumption describe in Chapter 12 and Part 3
-
+![image](/image/adjust_selection_bias_eg/.png)
