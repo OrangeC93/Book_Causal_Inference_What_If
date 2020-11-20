@@ -36,4 +36,14 @@ If the censoring C is now viewed as a treatment, the goal of the analysis is to 
 
 ## 8.5 How to adjust for selection bias
 In the previous chapter, we have described IP weights to adjust for counfounding, <img src="https://render.githubusercontent.com/render/math?math=W^A = 1/f(A/L)"> and selection bias <img src="https://render.githubusercontent.com/render/math?math=W^C = 1/Pr(C=0|A,L)">. When both confounding and selection bias exist, the product weight <img src="https://render.githubusercontent.com/render/math?math=W^A"> <img src="https://render.githubusercontent.com/render/math?math=W^C"> can be used to adjust simultaneously for both biases under assumption describe in Chapter 12 and Part 3
-![image](/image/adjust_selection_bias_eg/.png)
+
+Example:
+![image](/img/adjust_selection_bias_eg.png)
+```
+There are 20 individuals with heart disease (L = 1) who were assigned to wasabi supplementation (A = 1). 
+Of these, 4 remained uncensored and 16 were lost to follow-up. 
+That is, the conditional probability of remaining uncensored in this group is 1/5, Pr[C=0|L=1,A=1]=4/20=0.2. 
+16 censored individuals receive a zero weight (i.e., they do not contribute to the analysis).
+4 uncensored individuals receive a weight of 5, which is the inverse of their probability of being uncensored (1/5).
+IP weighting replaces the 20 original individuals by 5 copies of each of the 4 uncensored individuals.
+```
