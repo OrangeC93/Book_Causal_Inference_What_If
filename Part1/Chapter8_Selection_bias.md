@@ -51,3 +51,10 @@ Rather, one might attempt to remove selection bias by **stratification** (i.e., 
  <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|A=1,C=0,L=l]/Pr[Y=1|A=0,C=0,L=l]"> can be interpreted as the effect of treatment among the uncensored with L = l. 
  
 But sometimes, Stratification doesn't wokr in 8.4 and 8.6 because conditioning on L will opens the path from A to Y because L is a collider on that path. In cantrast, IP weighting appropriately adjusts for selection bias under Figures 8.3-8.6 because this approach is not based on estimating effect measures conditional on the covariates L, but rather on estimating unconditional effect measures after reweighting the individuals according to their treatment and their values of L.
+
+## 8.6 Selection without bias
+In summary, conditioning on a collider always induces an association between its causes, but this association could be restricted to certain levels of the common effect. In other words, it is theoretically possible that selection on a common effect does not result in selection bias when the analysis is restricted to a single level of the common effect. Collider stratification is not always a source of selection bias.
+
+```
+Conditioning on a collider can result in selection bias in theory but not always if the analysis is restricted to a single level of the common effect.
+```
