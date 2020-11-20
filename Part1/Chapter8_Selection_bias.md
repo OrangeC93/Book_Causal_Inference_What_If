@@ -37,7 +37,7 @@ If the censoring C is now viewed as a treatment, the goal of the analysis is to 
 ## 8.5 How to adjust for selection bias
 In the previous chapter, we have described IP weights to adjust for counfounding, <img src="https://render.githubusercontent.com/render/math?math=W^A = 1/f(A/L)"> and selection bias <img src="https://render.githubusercontent.com/render/math?math=W^C = 1/Pr(C=0|A,L)">. When both confounding and selection bias exist, the product weight <img src="https://render.githubusercontent.com/render/math?math=W^A"> <img src="https://render.githubusercontent.com/render/math?math=W^C"> can be used to adjust simultaneously for both biases under assumption describe in Chapter 12 and Part 3
 
-Example:
+Example: （8.3）
 ![image](/img/adjust_selection_bias_eg.png)
 ```
 There are 20 individuals with heart disease (L = 1) who were assigned to wasabi supplementation (A = 1). 
@@ -47,3 +47,5 @@ That is, the conditional probability of remaining uncensored in this group is 1/
   4 uncensored individuals receive a weight of 5, which is the inverse of their probability of being uncensored (1/5).
   IP weighting replaces the 20 original individuals by 5 copies of each of the 4 uncensored individuals.
 ```
+Rather, one might attempt to remove selection bias by stratification (i.e., by estimating the effect measure conditional on the L variables) rather than by IP weighting. Stratification could yield unbiased conditional effect measures within levels because conditioning on L is sufficient to block the backdoor path from C to Y . That is, the conditional risk ratio:
+ <img src="https://render.githubusercontent.com/render/math?math=Pr[Y=1|A=1,C=0,L=l]/Pr[Y=1|A=0,C=0,L=l]"> can be interpreted as the effect of treatment among the uncensored with L = l. But sometimes, Stratification doesn't wokr in 8.4 and 8.6 because conditioning on L will opens the path from A to Y because L is a collider on that path. In cantrast, IP weighting appropriately adjusts for selection bias under Figures 8.3-8.6 because this approach is not based on estimating effect measures conditional on the covariates L, but rather on estimating unconditional effect measures after reweighting the individuals according to their treatment and their values of L.
