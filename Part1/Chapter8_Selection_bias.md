@@ -43,7 +43,7 @@ Example:
 There are 20 individuals with heart disease (L = 1) who were assigned to wasabi supplementation (A = 1). 
 Of these, 4 remained uncensored and 16 were lost to follow-up. 
 That is, the conditional probability of remaining uncensored in this group is 1/5, Pr[C=0|L=1,A=1]=4/20=0.2. 
-16 censored individuals receive a zero weight (i.e., they do not contribute to the analysis).
-4 uncensored individuals receive a weight of 5, which is the inverse of their probability of being uncensored (1/5).
-IP weighting replaces the 20 original individuals by 5 copies of each of the 4 uncensored individuals.
+  16 censored individuals receive a zero weight (i.e., they do not contribute to the analysis).
+  4 uncensored individuals receive a weight of 5, which is the inverse of their probability of being uncensored (1/5).
+  IP weighting replaces the 20 original individuals by 5 copies of each of the 4 uncensored individuals.
 ```
