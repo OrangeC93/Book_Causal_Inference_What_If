@@ -35,5 +35,5 @@ Although some statistians use selection bias for both reasons, but we still reco
 If the censoring C is now viewed as a treatment, the goal of the analysis is to compute the causal effect of a joint intervention on A and C, To eliminate the selection bias for the effect of treatment A, we need to adjust for confounding for the effect of the treatment C.
 
 ## 8.5 How to adjust for selection bias
-
+In the previous chapter, we have described IP weights to adjust for counfounding, <img src="https://render.githubusercontent.com/render/math?math=W^A = 1/f(A/L)"> and selection bias <img src="https://render.githubusercontent.com/render/math?math=W^C = 1/Pr(C=0|A,L)">. When both confounding and selection bias exist, the product weight <img src="https://render.githubusercontent.com/render/math?math=W^A"> <img src="https://render.githubusercontent.com/render/math?math=W^C"> can be used to adjust simultaneously for both biases under assumption describe in Chapter 12 and Part 3
 
