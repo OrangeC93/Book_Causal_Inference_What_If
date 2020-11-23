@@ -24,3 +24,6 @@ The structure of measurement error can be classified into two properties: indepe
 - dependent differential
   - Figures 9.6 and 9.7 depict measurement errors that are both dependent and differential, which may result from a combination of the settings described above.
 
+Realistic causal diagrams need to simultaneously represent biases arising from confounding, selection, and measurement. The best method to fight bias due to mismeasurement is, obviously, to improve the measurement procedures.
+
+## Mismeasured confounders
