@@ -1,6 +1,4 @@
-## Measurement error
-
-## 9.2 The structure of measurement error
+## 9.1 Measurement error
 <img src="https://render.githubusercontent.com/render/math?math=U_A"> -> <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> <- A -> Y
 
 - The true treatment A affects both the outcome Y and the measured treatment <img src="https://render.githubusercontent.com/render/math?math=A^{*}">. 
@@ -11,3 +9,5 @@
 - Then there is no guarantee that the measure of association between <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> and <img src="https://render.githubusercontent.com/render/math?math=Y^{*}"> will equal the measure of causal effect of A on Y.
 
 - We say that there is measurement bias or information bias. In the presence of measurement bias, the identifiability conditions of exchangeability, positivity, and consistency are insufficient to compute the causal effect of treatment A on outcome Y.
+
+## 9.2 The structure of measurement error
