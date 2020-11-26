@@ -26,7 +26,7 @@ The structure of measurement error can be classified into two properties: indepe
 
 Realistic causal diagrams need to simultaneously represent biases arising from confounding, selection, and measurement. The best method to fight bias due to mismeasurement is, obviously, to improve the measurement procedures.
 
-## Mismeasured confounders
+## 9.3 Mismeasured confounders
 (9.8) <img src="https://render.githubusercontent.com/render/math?math=L^{*}<-L->A->Y, L->Y">
 - Investigators had data on the mismeasured variable <img src="https://render.githubusercontent.com/render/math?math=L^{*}"> rather than on the variable L. Unfortunately, the backdoor path A<-L->Y cannot be generally blocked by conditioning on <img src="https://render.githubusercontent.com/render/math?math=L^{*}">. The standardized or IP weighted risk ratio based on <img src="https://render.githubusercontent.com/render/math?math=L^{*}">, Y and A will generally differ from the cxausal risk ratio <img src="https://render.githubusercontent.com/render/math?math=Pr[Y^{a=1}=1]/Pr[Y^{a=0}=1]">. 
 
@@ -39,5 +39,5 @@ Mismeasurement of confounders may also result in apparent **effect modification*
 (9.10) A->Y->C-><img src="https://render.githubusercontent.com/render/math?math=C^{*}">, A->C
 - It is also possible that a **collider C** is measured with error as represented in Figure 9.10. In this setting, conditioning on the mismeasured collider <img src="https://render.githubusercontent.com/render/math?math=L^{*}"> will generally introduce selection bias because <img src="https://render.githubusercontent.com/render/math?math=L^{*}"> is a common effect of the treatment A and the outcome Y .
 
-## 94. Intention-to-treat effect: the effect of a misclassified treatment
+## 9.4 Intention-to-treat effect: the effect of a misclassified treatment
 
