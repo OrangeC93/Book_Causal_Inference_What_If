@@ -39,7 +39,7 @@ Realistic causal diagrams need to simultaneously represent biases arising from c
 Mismeasurement of confounders may also result in apparent **effect modification**. 
 
 (9.10) A->Y->C-><img src="https://render.githubusercontent.com/render/math?math=C^{*}">, A->C
-- It is also possible that a **collider C** is measured with error as represented in Figure 9.10. In this setting, conditioning on the mismeasured collider <img src="https://render.githubusercontent.com/render/math?math=L^{*}"> will generally introduce selection bias because <img src="https://render.githubusercontent.com/render/math?math=L^{*}"> is a common effect of the treatment A and the outcome Y .
+- It is also possible that a **collider C** is measured with error as represented in Figure 9.10. In this setting, conditioning on the mismeasured collider <img src="https://render.githubusercontent.com/render/math?math=C^{*}"> will generally introduce selection bias because <img src="https://render.githubusercontent.com/render/math?math=C^{*}"> is a common effect of the treatment A and the outcome Y .
 
 ## 9.4 Intention-to-treat effect: the effect of a misclassified treatment
 
