@@ -47,4 +47,4 @@ There is a key difference between the assigned treatment Z in randomized experim
 - The mismeasured treatment <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> in Figures 9.1-9.7 does not have a causal effect on the outcome Y . The association between <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> and Y is entirely due to their common cause A.
 - The assigned treatment Z in randomized experiments can have a causal effect on the outcome Y through two different pathways: (1) Z -> A -> Y (2) Z -> Y
 
-## Pre-protocol effect
+## 9.5 Pre-protocol effect
