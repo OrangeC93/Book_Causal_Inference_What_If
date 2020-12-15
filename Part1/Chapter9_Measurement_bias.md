@@ -1,7 +1,8 @@
 ## 9.1 Measurement error
 (9.1) <img src="https://render.githubusercontent.com/render/math?math=U_A"> -> <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> <- A -> Y
 
-- The true treatment A affects both the outcome Y and the measured treatment <img src="https://render.githubusercontent.com/render/math?math=A^{*}">. 
+- <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> is when A is measured imperfectly. For example, if the information on drug use is obtained by medical record abstraction.
+The true treatment A affects both the outcome Y and the measured treatment <img src="https://render.githubusercontent.com/render/math?math=A^{*}">. 
 - Node <img src="https://render.githubusercontent.com/render/math?math=U_A"> represent all factors other than A that determin the value of <img src="https://render.githubusercontent.com/render/math?math=A^{*}">, we refer to <img src="https://render.githubusercontent.com/render/math?math=U_{A}"> as the measurement error for A. Note, they are in unnecessary in discussion of confounding or selection bias
 
 (9.2) <img src="https://render.githubusercontent.com/render/math?math=U_A"> -> <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> <- A -> Y -> <img src="https://render.githubusercontent.com/render/math?math=Y^{*}"> <- <img src="https://render.githubusercontent.com/render/math?math=U_Y">
@@ -42,4 +43,8 @@ Mismeasurement of confounders may also result in apparent **effect modification*
 - It is also possible that a **collider C** is measured with error as represented in Figure 9.10. In this setting, conditioning on the mismeasured collider <img src="https://render.githubusercontent.com/render/math?math=C^{*}"> will generally introduce selection bias because <img src="https://render.githubusercontent.com/render/math?math=C^{*}"> is a common effect of the treatment A and the outcome Y .
 
 ## 9.4 Intention-to-treat effect: the effect of a misclassified treatment
+There is a key difference between the assigned treatment Z in randomized experiments and the misclassified treatments <img src="https://render.githubusercontent.com/render/math?math=A^{*}">.
+- The mismeasured treatment <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> in Figures 9.1-9.7 does not have a causal effect on the outcome Y . The association between <img src="https://render.githubusercontent.com/render/math?math=A^{*}"> and Y is entirely due to their common cause A.
+- The assigned treatment Z in randomized experiments can have a causal effect on the outcome Y through two different pathways: (1) Z -> A -> Y (2) Z -> Y
 
+## Pre-protocol effect
