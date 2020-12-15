@@ -48,3 +48,6 @@ There is a key difference between the assigned treatment Z in randomized experim
 - The assigned treatment Z in randomized experiments can have a causal effect on the outcome Y through two different pathways: (1) Z -> A -> Y (2) Z -> Y
 
 ## 9.5 Pre-protocol effect
+In randomized experiments, the per-protocol effect is the causal effect of treatment that would have been observed if all individuals had adhered to their assigned treatment as specified in the protocol of the experiment.
+
+In summary, in the analysis of randomized experiments there's thade off between bias due to the potential unmeasured confounding (when choosing the per-protocol effect) and misclassification bias (choosing the intention-to-treat effect)
