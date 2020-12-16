@@ -3,6 +3,14 @@ There are two qualitatively different reasons why causal inferences may be wrong
 - Unmeasured confounding, which is not expected in randomized experiments
 
 ## 10.1 Identification vs estimation
-Identification problems: we can assume the size of the study population is effectively infinite.
+A Wald confidence interval centered at <img src="https://render.githubusercontent.com/render/math?math=\hat{p}"> is only guaranteed to be valid in **large samples**. However, not all consistent estimators can be used to center a valid Wald confidence interval, even in large samples. Most users of statistics will consider an estimator unbiased if it can center a valid Wald interval and biased if it cannot.
 
-A Wald confidence interval centered at pˆ is only guaranteed to be valid in large samples. For simplicity, here we assume that our sample size is sufficiently large for the validity of our Wald interval.
+## 10.2 Estimation of causal effects
+Heretofore we have assumed that there is a larger group–the super-population–from which the study participants were randomly sampled. 
+
+## 10.3 The myth of the super population
+Here we will accept that individuals were randomly sampled from a super-population, and explore the consequences of random variability for causal inference in that context.
+
+## 10.4 The conditionality "principle"
+
+## 10.5 The curse of dimensionality
