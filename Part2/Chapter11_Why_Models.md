@@ -8,5 +8,8 @@ A nonparametric estimators of the conditional mean function as those that produc
 All methods for causal inference that we described in Part I of this book–standardization, IP weighting, stratification, matching–were based on nonparametric estimators of population quantities under a saturated model because they did not impose any a priori restrictions on the value of the effect estimates.
 
 ## 11.4 Smoothing
+In realistic applications, models often include many different covariates so that the curves are really hyperdimensional surfaces. Regardless of the dimensionality of the problem, the concept of smoothing remains invariant: the **fewer parameters** in the model, the **smoother** the prediction (response) surface will be.
 
+## 11.5 The bias-variance trade-off
+Although less smooth models may yield a less biased estimate, they also result in a larger variance.
 
