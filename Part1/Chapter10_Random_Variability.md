@@ -14,3 +14,5 @@ Here we will accept that individuals were randomly sampled from a super-populati
 ## 10.4 The conditionality "principle"
 
 ## 10.5 The curse of dimensionality
+This is the curse of dimensionality: conditional on all 100 covariates the marginal estimator is still biased, but now the conditional estimator is uninformative. This shows that, just because conditionality is compelling in simple examples, it should not be raised to a principle since it cannot be carried through for high-dimensional models.
+
