@@ -27,3 +27,19 @@ Basic steps:
   - Use statistical theory to derive the corresponding variance estimator
   - Approximate the variance by nonparametric bootstrapping
   - Use the robust variance estimator (e.g., as used for GEE models with an independent working correlation) that is a standard option in most statistical software packages
+
+## 12.3 Stabilized IP weights
+Concept: 
+- Nonstabilized IP weights: <img src="https://render.githubusercontent.com/render/math?math=W^{A} = 1/f(A|L)"> 
+- Stabilized IP weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A} =f(A)/f(A|L)">)  
+
+The stabilizing factor <img src="https://render.githubusercontent.com/render/math?math=f(A)"> in the numerator is responsible for the narrower range of the <img src="https://render.githubusercontent.com/render/math?math=f(A)/f(A|L)"> weights. For example: 
+- The IP weights <img src="https://render.githubusercontent.com/render/math?math=f(A)/f(A|L)"> range from 0.33 to 4.30
+- Whereas the IP weights <img src="https://render.githubusercontent.com/render/math?math=1/f(A|L)"> range from 1.05 to 16.7
+
+The mean of the stabilized weights is expected to be 1 because the size of the pseudo-population equals that of the study population (In data analyses one should always check that the estimated weights have mean have 1).
+
+Reason to stabilized IP weights: Even though nonstabilized and stabilized IP weights result in the same estimate, stabilized weights typically result in narrower 95% confidence intervals than nonstabilized weights.
+
+However, the statistical superiority of the stabilized weights can only occur when the (IP weighted) model is not saturated (the two-parameter model was saturated because treatment A could only take 2 possible values).
+
