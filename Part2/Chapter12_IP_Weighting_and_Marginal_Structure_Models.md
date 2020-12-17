@@ -58,7 +58,7 @@ Example: continous treatment A “change in smoking intensity” defined as numb
 - Want to estimate the average causal effect of increasing smoking intensity by 20 cigarettes per day compared with no change
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}]">
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}] = 20\beta_{1} + 400\beta_{2}">
-- Estimate stabilized weights <img src="https://render.githubusercontent.com/render/math?math=SW_{A}=f(A)/f(A|L)">
-  - For a continuous treatment A, f(A|L) is the probability density function, which is hard to estimate correctly 
+- Estimate stabilized weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A}=f(A)/f(A|L)">
+  - For a continuous treatment A, <img src="https://render.githubusercontent.com/render/math?math=f(A|L)"> is the probability density function, which is hard to estimate correctly 
   - We need to use a linear regression model to estimate the mean and variance of residuals for all combinations of values of L.
 
