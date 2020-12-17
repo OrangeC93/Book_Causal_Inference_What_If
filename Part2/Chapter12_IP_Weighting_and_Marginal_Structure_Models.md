@@ -62,7 +62,7 @@ Example: continous treatment A “change in smoking intensity” defined as numb
   - For a continuous treatment A, <img src="https://render.githubusercontent.com/render/math?math=f(A|L)"> is the probability density function, which is hard to estimate correctly 
   - We need to use a linear regression model to estimate the mean and variance of residuals for all combinations of values of L.
 
-## E12.5 ffect modification and marginal structural models
+## 12.5 ffect modification and marginal structural models
 Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification:
 - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} + \beta_{1}*a + \beta_{2}*V*a + \beta_{3}*V">
 
@@ -75,3 +75,6 @@ Estimate the model parameters:
 ```
 63 additional individuals who met the eligibility criteria but we excluded from the analysis because their weight in 1982 was not known, selecting only in non missing outcome values may introduce selection bias.
 ```
+IP weights 
+- <img src="https://render.githubusercontent.com/render/math?math=W^{A,C} = W^{A} * W^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 1/Pr[C=0|L,A]"> for the uncensored individuals and <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 0"> for the cencored individuals. 
+- <img src="https://render.githubusercontent.com/render/math?math=SW^{A,C} = SW^{A} * SW^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=SW^{C} = Pr[C=0|A]/Pr[C=0|L,A]"> for create a psuedo population of the same size as the original study population after censoring
