@@ -49,7 +49,9 @@ Marginal structual models: Models for the marginal mean of a counterfactual outc
 Recall the basic concept:
 - We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} + \theta_{1}*A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
 
-Example: continous treatment A “change in smoking intensity” defined as number of cigarettes smoked per day in 1982 minus number of cigarettes smoked per day at baseline.
+Example: continous treatment A “change in smoking intensity” defined as number of cigarettes smoked per day in 1982 minus number of cigarettes smoked per day at baseline. We are interested in estimating the difference in average weight change under different changes in treatment intensity in the 1162 individuals who smoked 25 or fewer cigarettes per day at baseline.
+
+(Page 165). 
 - Marginal structural model: we believe a parabola can describes the does-response curve
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} + \beta_{1}*a + \beta_{2}*a^{2}">
 - Want to estimate the average causal effect of increasing smoking intensity by 20 cigarettes per day compared with no change
