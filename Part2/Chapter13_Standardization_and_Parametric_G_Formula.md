@@ -24,3 +24,16 @@ Steps: expansion of dataset, outcome modeling, prediction, and standardized by a
 - Averaging: we compute the average of all predicted values in the second block (precisely the standardized mean outcome in the untreated) and third block(precisely the standardized mean outcome in the treated)
 
 - Confidence interval: use bootstrap to calculate the confidence interval on the previous estimate
+
+## 13.4 IP weighting or standardization
+- Large differences between the IP weighted and standardized estimate will alert us to the presence of serious model misspecification in at least one of the estimates. Small differences do not guarantee absence of serious model misspecification, but will be reassuring–though logically possible, it is unlikely that badly misspecified models resulting in bias of similar magnitude and direction for both methods.
+- Often there is no need to choose between IP weighting and the parametric g-formula. When both methods can be used to estimate a causal effect, just use both methods. 
+- Both IP weighting and standardization are estimators of the g-formula, a general method for causal inference first described in 1986. We say that standardization is a plug-in g-formula estimator because it simply replaces the conditional mean outcome in the g-formula by its estimates.
+
+## 13.5 How seriously do we take our estimates?
+Observational effect estimates are always open to serious crticism, the validity of our estimates for the target population requires many conditions: 
+- First, the identifiability conditions of exchangeability, positivity, and consistency (Chapter 3) need to hold for the observational study to resemble the target trial.
+- Second, all variables used in the analysis need to be correctly measured. Measurement error in the treatment A, the outcome Y , or the confounders L will generally result in bias (Chapter 9).
+- Third, all models used in the analysis need to be correctly specified (Chapter 11).
+
+Therefore a healthy skepticism of causal inferences drawn from observational data is necessary.
