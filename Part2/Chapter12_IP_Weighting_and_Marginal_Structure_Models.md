@@ -1,8 +1,6 @@
 ## 12.1 The causal question
 Goal： estimate the average causal effect of smoking cessation A on weight gain Y.
 
-The associational difference is generally different from the causal difference. The former will not generally have a causal interpretation if quitters and non-quitters differ with respect to characteristics that affect weight gain.
-
 Here we assume that the following 9 variables, all measured at baseline, are sufficient to adjust for confounding: 
 - sex (0: male, 1: female)
 - age (in years)
