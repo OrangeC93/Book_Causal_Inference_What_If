@@ -7,3 +7,20 @@ Standardized mean in the uncensored who received treatment level a is <img src="
 To obtain parametric estimates of <img src="https://render.githubusercontent.com/render/math?math=E[Y|A=a, C=0, L=l] "> in each of the millions of strata defined by L, we fit a linear regression model for the mean weight gain with treatment A and all 9 confounders in L included as covariates.
 
 ## 13.3 Standardizing the mean outcome to the confounder distribution
+Steps: expansion of dataset, outcome modeling, prediction, and standardized by averaging.
+
+Expansion of Dataset: (add a product term A * L to make the model saturated)
+- First block: same as the original dataset (Y, A, L, A * L)
+- Second block: set value A to 0 (untreated) for all rows, delete the outcome for all individuals (Y, 0, L, 0)
+- Second block: set value A to 1 (treated) for all rows (Y, 1, L, L)
+
+Outcome modeling:
+- Use the first block(actual data) to fit a regression model for the mean outcome Y given A and L
+
+Prediction:
+- Use the parameter estimates from the first block to predict the outcome values for all rows in the second and third blocks
+- The predicted outcome values for the second block are the mean estimates for each combination of values of L and A = 0, and the predicted values for the third block are the mean estimates for each combinations of values of L and A = 1
+
+Averaging: we compute the average of all predicted values in the second block (precisely the standardized mean outcome in the untreated) and third block(precisely the standardized mean outcome in the treated)
+
+Confidence interval: use bootstrap to calculate the confidence interval on the previous estimate
