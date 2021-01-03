@@ -27,3 +27,14 @@ For continuous variables, the model needs to specify the dose-response function 
 
 
 ## 14.4 Rank preservation
+The additive rank-preserving model in this section makes a much stronger assumption than non-rank-preserving models: the assumption of constant treatment effect for all individuals with the same value of L.There is no reason why we would want to use such an unrealistic rank-preserving model in practice. 
+
+And yet we use it in the next section to introduce g-estimation because g-estimation is easier to understand for rank-preserving models, and because the g-estimation procedure is actually the same for rank-preserving and nonrank-preserving models. Note that the (conditional additive) rank-preserving structural model is a structural mean model–the mean of the individual shifts from <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}"> to <img src="https://render.githubusercontent.com/render/math?math=Y^{a=1}">is equal to each of the individual shifts within levels of L.
+
+
+## 14.5 G-estimation
+![image](/img/g_estimate_1.png)
+
+## 14.6 Structural nested models with two or more parameters
+ 
+![image](/img/g_estimate_2.png)
