@@ -2,10 +2,10 @@
 In this chapter we will use g-estimation to estimate the average causal effect of smoking cessation A on weight gain Y in each strata defined by the covariates L. This conditional effect is represented by <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}|L] - E[Y^{a=0,c=0}|L]">.
 
 ## 14.2 Exchangeability revisited
-When conditional exchangeability holds, knowing the value of <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}"> does not help differentiate between quitters and nonquitters with a particular value of L. That is, the conditional (on L) probability of being a quitter is the same for all values of the counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}">. Mathematically, we write <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|Y^{a=0}, L] = Pr[A=1}L]">.
+When conditional exchangeability holds, knowing the value of <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}"> does not help differentiate between quitters and nonquitters with a particular value of L. That is, the conditional (on L) probability of being a quitter is the same for all values of the counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}">. Mathematically, we write <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|Y^{a=0}, L] = Pr[A=1|L]">.
 
 ## 14.3 Structural nested mean models
-Under exchangeability, the structural model can be written as <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta * a + \beta * a * L">, which is referred as a **structural nested mean model**. 
+Under exchangeability, the structural model can be written as <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1} * a + \beta{2} * a * L">, which is referred as a **structural nested mean model**. 
 - If there were no effect measure modification by L, these differences would be constant across strata, and our structural model for the conditional causal effect would be <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta * a">.
 - If there are effect modification by L, to allow for the causal effect to depend on L, we need to add a product term to the structual model <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta * a + \beta * a * L">
 
