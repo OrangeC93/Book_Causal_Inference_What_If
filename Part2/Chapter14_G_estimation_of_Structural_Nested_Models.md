@@ -1,3 +1,7 @@
+IP weighting, standardization, and g-estimation are often collectively referred to as g-methods because they are designed for application to generalized treatment contrasts involving treatments that vary over time.
+
+There is a reason for introducing g-estimation later is that: describing g-estimation is facilitated by the specification of a structural model, even if the model is saturated. Models whose parameters are estimated via g-estimation are known as structural nested models. 
+
 ## 14.1 The causal question revisited
 In this chapter we will use g-estimation to estimate the average causal effect of smoking cessation A on weight gain Y in each strata defined by the covariates L. This conditional effect is represented by <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}|L] - E[Y^{a=0,c=0}|L]">.
 
