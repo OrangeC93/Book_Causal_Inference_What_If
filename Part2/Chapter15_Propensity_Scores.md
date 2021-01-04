@@ -23,6 +23,6 @@ Propensity models: Propensity models are models for the probability of treatment
 
 Structural models: Structural models describe the relation between the treatment A and some component of the distribution (e.g., the mean) of the counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y^{a}">, either marginally or within levels of the variables L.
 - Marginal structural models: include parameters for treatment A, for the variables V that may be effect modifiers, and for product terms between treatment A and variables V.
- - If no covariates V are included, then the model is truly marginal.
- - If all variables L are included as possible effect modifiers then the marginal structural model becomes a faux marginal structural model.
+  - If no covariates V are included, then the model is truly marginal.
+  - If all variables L are included as possible effect modifiers then the marginal structural model becomes a faux marginal structural model.
 - Structural nested models: include parameters for treatment and for product terms between treatment A and all variables in L that are effect modifiers.
