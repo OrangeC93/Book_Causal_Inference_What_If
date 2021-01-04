@@ -21,7 +21,7 @@ These models include parameters for the product terms between treatment A and th
 
 (Page 192). 
 ```
-- If there were no effect measure modification by L, these differences would be constant across strata, and our structural model for the conditional causal effect would be <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1} * a">.
+- If there were no effect measure modification by L, these differences would be constant across strata, and our structural model for the conditional causal effect would be <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1}a">.
 - If there are effect modification by L, to allow for the causal effect to depend on L, we need to add a product term to the structual model <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1}a %2B \beta_{2}aL">
 
 Compared with IP weighting and standardization parametric models, structural nested models are semiparametric because they're agnostic about both the intercept and the main effect of L, that is, there is no parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{0}"> and no parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> for a term <img src="https://render.githubusercontent.com/render/math?math=\beta_{3} * L">. Therefore, the sturctural nested models make fewer assumptions and can be more robust to model misspecification than the parametric g-formula.
