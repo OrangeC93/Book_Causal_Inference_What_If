@@ -62,7 +62,7 @@ Example: continous treatment A “change in smoking intensity” defined as numb
 
 ## 12.5 Effect modification and marginal structural models
 Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification:
-- <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}*a %2B \beta_{2}*V*a %2B \beta_{3}*V">
+- <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}Va %2B \beta_{3}V">
 
 Estimate the model parameters:
 - Fit the linear regression model via weighted least square IP weights,
