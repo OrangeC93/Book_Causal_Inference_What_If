@@ -22,7 +22,7 @@ Basic steps:
 - Obtain parametric estimates of <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|L]"> in each of the millions of strata defined by L
   - We fit a logistic regression model for the A (**probability of quitting smoking**) with all L(**9 confounders**) included as covariates. 
 - Computing the difference <img src="https://render.githubusercontent.com/render/math?math=\bar{E}_{ps}[Y|A=1] - \bar{E}_{ps}[Y|A=0]"> in the psuedo-population created by the estimated IP weights. 
-  - Fit the linear mean model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} + \theta_{1}*A"> by weighted least squares, with individuals weighted by their estimated weights <img src="https://render.githubusercontent.com/render/math?math=\bar{W}">: 1/<img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]"> for quitters and 1/(1- <img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]">) for the non-quitters. The parameter estimates <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> was 3.4. That is, we estimated that quitting smoking increase weight by <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> = 3.4 on average.
+  - Fit the linear mean model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0}%2B\theta_{1}*A"> by weighted least squares, with individuals weighted by their estimated weights <img src="https://render.githubusercontent.com/render/math?math=\bar{W}">: 1/<img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]"> for quitters and 1/(1- <img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]">) for the non-quitters. The parameter estimates <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> was 3.4. That is, we estimated that quitting smoking increase weight by <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> = 3.4 on average.
 - Obtain confidence interval about the <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}">=3.4 we need a method that takes the IP weighting into account. There're 3 ways:
   - Use statistical theory to derive the corresponding variance estimator
   - Approximate the variance by nonparametric bootstrapping
@@ -43,26 +43,26 @@ Reason to stabilized IP weights:
 - However, the statistical superiority of the stabilized weights can only occur when the (IP weighted) model is not saturated (the two-parameter model was saturated because treatment A could only take 2 possible values).
 
 ## 12.4 Marginal structure models
-Marginal structual models: Models for the marginal mean of a counterfactual outcome, <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} + \beta_{1}*a">
+Marginal structual models: Models for the marginal mean of a counterfactual outcome, <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}*a">
 - A (nonsaturated) marginal structural  mean model for a continuous treatment A.
 
 Recall the basic concept:
-- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} + \theta_{1}*A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
+- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}*A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
 
 Example: continous treatment A “change in smoking intensity” defined as number of cigarettes smoked per day in 1982 minus number of cigarettes smoked per day at baseline. We are interested in estimating the difference in average weight change under different changes in treatment intensity in the 1162 individuals who smoked 25 or fewer cigarettes per day at baseline.
 
 - Marginal structural model: we believe a parabola can describes the does-response curve
-  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} + \beta_{1}*a + \beta_{2}*a^{2}">
+  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}*a %2B \beta_{2}*a^{2}">
 - Want to estimate the average causal effect of increasing smoking intensity by 20 cigarettes per day compared with no change
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}]">
-  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}] = 20\beta_{1} + 400\beta_{2}">
+  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}] = 20\beta_{1} %2B 400\beta_{2}">
 - Estimate stabilized weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A}=f(A)/f(A|L)">
   - For a continuous treatment A, <img src="https://render.githubusercontent.com/render/math?math=f(A|L)"> is the probability density function, which is hard to estimate correctly.
   - We need to use a linear regression model to estimate the mean and variance of residuals for all combinations of values of L.
 
 ## 12.5 Effect modification and marginal structural models
 Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification:
-- <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} + \beta_{1}*a + \beta_{2}*V*a + \beta_{3}*V">
+- <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}*a %2B \beta_{2}*V*a %2B \beta_{3}*V">
 
 Estimate the model parameters:
 - Fit the linear regression model via weighted least square IP weights,
