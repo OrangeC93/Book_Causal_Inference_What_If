@@ -16,6 +16,11 @@ When conditional exchangeability holds, knowing the value of <img src="https://r
 
 ## 14.3 Structural nested mean models
 Under exchangeability, the structural model can be written as <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1} * a + \beta{2} * a * L">, which is referred as a **structural nested mean model**. 
+```
+These models include parameters for the product terms between treatment A and the variables L, but no parameters for the variables L themselves. This is an attractive property of structural nested models because we are interested in the causal effect of A on Y within levels of L but not in the (noncausal) relation between L and Y .
+
+(Page 192). 
+```
 - If there were no effect measure modification by L, these differences would be constant across strata, and our structural model for the conditional causal effect would be <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1} * a">.
 - If there are effect modification by L, to allow for the causal effect to depend on L, we need to add a product term to the structual model <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a} - Y^{a=0}|A=a,L] = \beta_{1} * a + \beta_{2} * a * L">
 
