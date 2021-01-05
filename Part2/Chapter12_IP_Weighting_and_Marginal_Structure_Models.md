@@ -106,8 +106,8 @@ Reason to stabilized IP weights:
 - However, the statistical superiority of the stabilized weights can only occur when the (IP weighted) model is not saturated (the two-parameter model was saturated because treatment A could only take 2 possible values).
 
 ## 12.4 Marginal structure models
-Marginal structual models: Models for the marginal mean of a counterfactual outcome, <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}a">
-- A (nonsaturated) marginal structural  mean model for a continuous treatment A.
+Marginal structual models: models for the marginal mean of a counterfactual outcome (the outcome variable of this model is counterfactual and hence generally unobserved, therefore the model cannot be fit to the data of any real world study), like <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}a">
+(this is a saturated marginal structural mean model for a dichotomous treatment A)
 
 Recall the basic concept:
 - We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
