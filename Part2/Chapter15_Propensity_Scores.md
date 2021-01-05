@@ -26,3 +26,62 @@ Structural models: Structural models describe the relation between the treatment
   - If no covariates V are included, then the model is truly marginal.
   - If all variables L are included as possible effect modifiers then the marginal structural model becomes a faux marginal structural model.
 - Structural nested models: include parameters for treatment and for product terms between treatment A and all variables in L that are effect modifiers.
+
+## Code Chapter 15
+```python
+formula = (
+    'qsmk ~ sex + race + age + I(age**2) + C(education)'
+    '     + smokeintensity + I(smokeintensity**2) + smokeyrs + I(smokeyrs**2)'
+    '     + C(exercise) + C(active) + wt71 + I(wt71**2)'
+) ## no product term
+
+model = sm.Logit.from_formula(formula, data=nhefs_all) 
+res = model.fit(disp=0)
+
+propensity = res.predict(nhefs_all)
+nhefs['propensity'] = propensity[~nhefs_all.wt82_71.isnull()]
+
+model = sm.OLS.from_formula('wt82_71 ~ qsmk + propensity', data=nhefs)
+res = model.fit()
+res.summary().tables[1]
+
+
+def outcome_regress_effect(data):
+    model = sm.OLS.from_formula('wt82_71 ~ qsmk + propensity', data=data)
+    res = model.fit()
+    
+    data_qsmk_1 = data.copy()
+    data_qsmk_1['qsmk'] = 1
+    
+    data_qsmk_0 = data.copy()
+    data_qsmk_0['qsmk'] = 0
+    
+    mean_qsmk_1 = res.predict(data_qsmk_1).mean()
+    mean_qsmk_0 = res.predict(data_qsmk_0).mean()
+    
+    return mean_qsmk_1 - mean_qsmk_0
+    
+def nonparametric_bootstrap(data, func, n=1000):
+    estimate = func(data)
+    
+    n_rows = data.shape[0]
+    indices = list(range(n_rows))
+    
+    b_values = []
+    for _ in tqdm(range(n)):
+        data_b = data.sample(n=n_rows, replace=True)
+        b_values.append(func(data_b))
+    
+    std = np.std(b_values)
+    
+    return estimate, (estimate - 1.96 * std, estimate + 1.96 * std)
+    
+data = nhefs[['wt82_71', 'qsmk', 'propensity']]
+info = nonparametric_bootstrap(
+    data, outcome_regress_effect, n=2000
+)
+
+
+print('         estimate   95% C.I.')
+print('effect    {:>5.1f}    ({:>0.1f}, {:>0.1f})'.format(info[0], info[1][0], info[1][1]))
+```
