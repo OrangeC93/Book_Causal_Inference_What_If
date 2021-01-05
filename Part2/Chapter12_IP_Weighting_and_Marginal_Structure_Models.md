@@ -43,16 +43,16 @@ Reason to stabilized IP weights:
 - However, the statistical superiority of the stabilized weights can only occur when the (IP weighted) model is not saturated (the two-parameter model was saturated because treatment A could only take 2 possible values).
 
 ## 12.4 Marginal structure models
-Marginal structual models: Models for the marginal mean of a counterfactual outcome, <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}*a">
+Marginal structual models: Models for the marginal mean of a counterfactual outcome, <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}a">
 - A (nonsaturated) marginal structural  mean model for a continuous treatment A.
 
 Recall the basic concept:
-- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}*A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
+- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
 
 Example: continous treatment A “change in smoking intensity” defined as number of cigarettes smoked per day in 1982 minus number of cigarettes smoked per day at baseline. We are interested in estimating the difference in average weight change under different changes in treatment intensity in the 1162 individuals who smoked 25 or fewer cigarettes per day at baseline.
 
 - Marginal structural model: we believe a parabola can describes the does-response curve
-  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}*a %2B \beta_{2}*a^{2}">
+  - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}a^{2}">
 - Want to estimate the average causal effect of increasing smoking intensity by 20 cigarettes per day compared with no change
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}]">
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}] = 20\beta_{1} %2B 400\beta_{2}">
@@ -74,8 +74,8 @@ Estimate the model parameters:
 63 additional individuals who met the eligibility criteria but we excluded from the analysis because their weight in 1982 was not known, selecting only in non missing outcome values may introduce selection bias.
 ```
 IP weights 
-- <img src="https://render.githubusercontent.com/render/math?math=W^{A,C} = W^{A} * W^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 1/Pr[C=0|L,A]"> for the uncensored individuals and <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 0"> for the cencored individuals. 
-- <img src="https://render.githubusercontent.com/render/math?math=SW^{A,C} = SW^{A} * SW^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=SW^{C} = Pr[C=0|A]/Pr[C=0|L,A]"> for create a psuedo population of the same size as the original study population after censoring
+- <img src="https://render.githubusercontent.com/render/math?math=W^{A,C} = W^{A}  W^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 1/Pr[C=0|L,A]"> for the uncensored individuals and <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 0"> for the cencored individuals. 
+- <img src="https://render.githubusercontent.com/render/math?math=SW^{A,C} = SW^{A}  SW^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=SW^{C} = Pr[C=0|A]/Pr[C=0|L,A]"> for create a psuedo population of the same size as the original study population after censoring
 
 ## In summary
 IP weighting creates a pseudo-population in which the distribution of the variables in L is the same in the treated and the untreated. Then, under the assumptions of exchangeability and positivity given L, we estimate <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}]"> by simply computing <img src="https://render.githubusercontent.com/render/math?math=\bar{E}[Y|A=a,C=0]"> as the average outcome in the pseudo-population. If A were a continuous treatment, we would also need a structural model to estimate <img src="https://render.githubusercontent.com/render/math?math=\bar{E}[Y|A, C=0]"> in the pseudo-population for all possible values of A. 
