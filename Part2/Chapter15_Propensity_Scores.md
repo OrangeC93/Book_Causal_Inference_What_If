@@ -28,6 +28,7 @@ Structural models: Structural models describe the relation between the treatment
 - Structural nested models: include parameters for treatment and for product terms between treatment A and all variables in L that are effect modifiers.
 
 ## Code Chapter 15
+Program 15.4
 ```python
 formula = (
     'qsmk ~ sex + race + age + I(age**2) + C(education)'
