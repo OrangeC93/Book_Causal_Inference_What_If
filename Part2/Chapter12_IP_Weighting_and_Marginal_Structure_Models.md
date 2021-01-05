@@ -68,24 +68,24 @@ Basic steps:
   - Use statistical theory to derive the corresponding variance estimator
   - Approximate the variance by nonparametric bootstrapping
   - Use the robust variance estimator (e.g., as used for GEE models with an independent working correlation) that is a standard option in most statistical software packages
-``` python
-## program 12.2
-gee = sm.GEE(
-    nhefs.wt82_71,
-    nhefs[['constant', 'qsmk']],
-    groups=nhefs.seqn,
-    weights=weights
-)
-res = gee.fit()
-res.summary().tables[1]
+  ``` python
+  ## program 12.2
+  gee = sm.GEE(
+      nhefs.wt82_71,
+      nhefs[['constant', 'qsmk']],
+      groups=nhefs.seqn,
+      weights=weights
+  )
+  res = gee.fit()
+  res.summary().tables[1]
 
-est = res.params.qsmk
-conf_ints = res.conf_int(alpha=0.05, cols=None)
-lo, hi = conf_ints[0]['qsmk'], conf_ints[1]['qsmk']
+  est = res.params.qsmk
+  conf_ints = res.conf_int(alpha=0.05, cols=None)
+  lo, hi = conf_ints[0]['qsmk'], conf_ints[1]['qsmk']
 
-print('           estimate   95% C.I.')
-print('theta_1     {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
-```
+  print('           estimate   95% C.I.')
+  print('theta_1     {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
+  ```
 ## 12.3 Stabilized IP weights
 Concept: 
 - Nonstabilized IP weights: <img src="https://render.githubusercontent.com/render/math?math=W^{A} = 1/f(A|L)"> 
