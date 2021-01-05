@@ -39,3 +39,39 @@ Observational effect estimates are always open to serious crticism, the validity
 - Third, all models used in the analysis need to be correctly specified (Chapter 11).
 
 Therefore a healthy skepticism of causal inferences drawn from observational data is necessary.
+
+## Code Chapter 13 
+Program 13.4: Use bootstrap to calculate causal effect and the confidence interval
+
+``` python
+boot_samples = []
+common_X = [
+    'one', 'sex', 'race', 'edu_2', 'edu_3', 'edu_4', 'edu_5', 
+    'exercise_1', 'exercise_2', 'active_1', 'active_2',
+    'age', 'age^2', 'wt71', 'wt71^2',
+    'smokeintensity', 'smokeintensity^2', 'smokeyrs', 'smokeyrs^2'
+]
+
+for _ in range(2000):
+    sample = nhefs.sample(n=nhefs.shape[0], replace=True)
+    
+    y = sample.wt82_71
+    X = sample[common_X + ['qsmk', 'qsmk_x_smokeintensity']] ## add a product term to make the model saturated
+    block2 = sample[common_X + ['zero', 'zero']] ## if every one is untreated
+    block3 = sample[common_X + ['one', 'smokeintensity']] ## if every one is untreated
+    
+    result = sm.OLS(y, X).fit()
+    
+    block2_pred = result.predict(block2)
+    block3_pred = result.predict(block3)
+    
+    boot_samples.append(block3_pred.mean() - block2_pred.mean())
+
+std = np.std(boot_samples)
+
+lo = est_diff - 1.96 * std
+hi = est_diff + 1.96 * std
+
+print('               estimate   95% C.I.')
+print('causal effect   {:>6.1f}   ({:>0.1f}, {:>0.1f})'.format(est_diff, lo, hi))
+```
