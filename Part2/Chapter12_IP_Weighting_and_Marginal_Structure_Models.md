@@ -21,18 +21,81 @@ Here we cannot estimated the quantiy <img src="https://render.githubusercontent.
 Basic steps:
 - Obtain parametric estimates of <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|L]"> in each of the millions of strata defined by L
   - We fit a logistic regression model for the A (**probability of quitting smoking**) with all L(**9 confounders**) included as covariates. 
+  ```python
+  ## program 12.2
+  def logit_ip_f(y, X):
+    """
+    Create the f(y|X) part of IP weights
+    from logistic regression
+    
+    Parameters
+    ----------
+    y : Pandas Series
+    X : Pandas DataFrame
+    
+    Returns
+    -------
+    Numpy array of IP weights
+    
+    """
+    model = sm.Logit(y, X)
+    res = model.fit()
+    weights = np.zeros(X.shape[0])
+    weights[y == 1] = res.predict(X.loc[y == 1])
+    weights[y == 0] = 1-res.predict(X.loc[y == 0])
+    return weights
+  ```
 - Computing the difference <img src="https://render.githubusercontent.com/render/math?math=\bar{E}_{ps}[Y|A=1] - \bar{E}_{ps}[Y|A=0]"> in the psuedo-population created by the estimated IP weights. 
   - Fit the linear mean model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0}%2B\theta_{1}A"> by weighted least squares, with individuals weighted by their estimated weights <img src="https://render.githubusercontent.com/render/math?math=\bar{W}">: 1/<img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]"> for quitters and 1/(1- <img src="https://render.githubusercontent.com/render/math?math=\bar{Pr}[A=1|L]">) for the non-quitters. The parameter estimates <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> was 3.4. That is, we estimated that quitting smoking increase weight by <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}"> = 3.4 on average.
+  ```python
+  ## program 12.2
+  X_ip = nhefs[[
+    'constant',
+    'sex', 'race', 'age', 'age^2', 'edu_2', 'edu_3', 'edu_4', 'edu_5',
+    'smokeintensity', 'smokeintensity^2', 'smokeyrs', 'smokeyrs^2', 
+    'exercise_1', 'exercise_2', 'active_1', 'active_2', 'wt71', 'wt71^2']]
+
+  denoms = logit_ip_f(nhefs.qsmk, X_ip)
+  weights = 1 / denoms
+  
+  ## main model, weighted least squares gives the right coefficients, but the standard error is off.
+  denoms = logit_ip_f(nhefs.qsmk, X_ip)
+  wls = sm.WLS(y, X, weights=weights) 
+  res = wls.fit()
+  res.summary().tables[1]
+  ```
 - Obtain confidence interval about the <img src="https://render.githubusercontent.com/render/math?math=\bar{\theta}">=3.4 we need a method that takes the IP weighting into account. There're 3 ways:
   - Use statistical theory to derive the corresponding variance estimator
   - Approximate the variance by nonparametric bootstrapping
   - Use the robust variance estimator (e.g., as used for GEE models with an independent working correlation) that is a standard option in most statistical software packages
+``` python
+## program 12.2
+gee = sm.GEE(
+    nhefs.wt82_71,
+    nhefs[['constant', 'qsmk']],
+    groups=nhefs.seqn,
+    weights=weights
+)
+res = gee.fit()
+res.summary().tables[1]
 
+est = res.params.qsmk
+conf_ints = res.conf_int(alpha=0.05, cols=None)
+lo, hi = conf_ints[0]['qsmk'], conf_ints[1]['qsmk']
+
+print('           estimate   95% C.I.')
+print('theta_1     {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
+```
 ## 12.3 Stabilized IP weights
 Concept: 
 - Nonstabilized IP weights: <img src="https://render.githubusercontent.com/render/math?math=W^{A} = 1/f(A|L)"> 
 - Stabilized IP weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A} =f(A)/f(A|L)">)  
-
+``` python
+## program 12.3
+s_weights = np.zeros(nhefs.shape[0])
+s_weights[qsmk] = qsmk.mean() * weights[qsmk]    # `qsmk` was defined a few cells ago
+s_weights[~qsmk] = (1 - qsmk).mean() * weights[~qsmk]
+```
 The stabilizing factor <img src="https://render.githubusercontent.com/render/math?math=f(A)"> in the numerator is responsible for the narrower range of the <img src="https://render.githubusercontent.com/render/math?math=f(A)/f(A|L)"> weights. For example: 
 - The IP weights <img src="https://render.githubusercontent.com/render/math?math=f(A)/f(A|L)"> range from 0.33 to 4.30
 - Whereas the IP weights <img src="https://render.githubusercontent.com/render/math?math=1/f(A|L)"> range from 1.05 to 16.7
