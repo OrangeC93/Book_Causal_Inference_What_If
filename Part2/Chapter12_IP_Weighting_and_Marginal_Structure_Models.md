@@ -182,7 +182,7 @@ Add covariates V (which may be non-confounders) in a marginal structual model to
 Estimate the model parameters:
 - Fit the linear regression model via weighted least square IP weights.
 - The vector of covariates L needs to include V -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V
-- <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A]/f[A|L]">
+- <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=W^{A} = f[A]/f[A|L]">
 ```python
 ## Create the numerator of the IP weights. Reuse the basic weights for the denominator.
 numer = logit_ip_f(nhefs.qsmk, nhefs[['constant', 'sex']])
