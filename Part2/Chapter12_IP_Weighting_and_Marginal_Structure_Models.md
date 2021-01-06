@@ -208,5 +208,48 @@ IP weights
 - <img src="https://render.githubusercontent.com/render/math?math=W^{A,C} = W^{A}  W^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 1/Pr[C=0|L,A]"> for the uncensored individuals and <img src="https://render.githubusercontent.com/render/math?math=W^{C} = 0"> for the cencored individuals. 
 - <img src="https://render.githubusercontent.com/render/math?math=SW^{A,C} = SW^{A}  SW^{C}"> in which <img src="https://render.githubusercontent.com/render/math?math=SW^{C} = Pr[C=0|A]/Pr[C=0|L,A]"> for create a psuedo population of the same size as the original study population after censoring
 
+```python
+## censor feature
+nhefs_all['censored'] = nhefs_all.wt82.isnull().astype('int')
+
+## IP weights for treatmen
+X_ip = nhefs_all[[
+    'constant', 'sex', 'race', 'edu_2', 'edu_3', 'edu_4', 'edu_5', 
+    'exercise_1', 'exercise_2', 'active_1', 'active_2',
+    'age', 'age^2', 'wt71', 'wt71^2',
+    'smokeintensity', 'smokeintensity^2', 'smokeyrs', 'smokeyrs^2'
+]]
+ip_denom = logit_ip_f(nhefs_all.qsmk, X_ip)
+ip_numer = logit_ip_f(nhefs_all.qsmk, nhefs_all.constant)
+sw_A = ip_numer / ip_denom
+
+## IP weights for censoring
+# same as previous, but with 'qsmk' added
+X_ip = nhefs_all[[
+    'constant', 'sex', 'race', 'edu_2', 'edu_3', 'edu_4', 'edu_5', 
+    'exercise_1', 'exercise_2', 'active_1', 'active_2',
+    'age', 'age^2', 'wt71', 'wt71^2',
+    'smokeintensity', 'smokeintensity^2', 'smokeyrs', 'smokeyrs^2',
+    'qsmk'
+]]
+ip_denom = logit_ip_f(nhefs_all.censored, X_ip)
+ip_numer = logit_ip_f(
+    nhefs_all.censored,
+    nhefs_all[['constant', 'qsmk']]
+)
+sw_C = ip_numer / ip_denom
+sw_C[nhefs_all.censored == 1] = 1
+
+## create the combined IP weights
+sw_AC = sw_A * sw_C
+
+wls = sm.WLS(
+    nhefs.wt82_71,
+    nhefs[['constant', 'qsmk']],
+    weights=sw_AC[nhefs_all.censored == 0]
+) 
+res = wls.fit(cov_type='cluster', cov_kwds={'groups': nhefs.seqn})
+```
 ## In summary
 IP weighting creates a pseudo-population in which the distribution of the variables in L is the same in the treated and the untreated. Then, under the assumptions of exchangeability and positivity given L, we estimate <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}]"> by simply computing <img src="https://render.githubusercontent.com/render/math?math=\bar{E}[Y|A=a,C=0]"> as the average outcome in the pseudo-population. If A were a continuous treatment, we would also need a structural model to estimate <img src="https://render.githubusercontent.com/render/math?math=\bar{E}[Y|A, C=0]"> in the pseudo-population for all possible values of A. 
+
