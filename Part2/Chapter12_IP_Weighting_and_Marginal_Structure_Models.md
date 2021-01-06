@@ -155,50 +155,53 @@ Example: continous treatment A “change in smoking intensity” defined as numb
   summary[["mean", "mean_ci_lower", "mean_ci_upper"]]
   ```
   - For a dichotomous outcome: "if interested in the causal effect of quitting smoking A (1: yes, 0: no) on the risk of death D (1: yes, 0: no) by 1982, one could consider a _marginal structural logistic model_"
- ```python
- model = sm.GEE(
-    nhefs.death,
-    nhefs[['constant', 'qsmk']],
-    groups=nhefs.seqn,
-    weights=s_weights,
-    family=sm.families.Binomial()
-)
-res = model.fit()
-res.summary().tables[1]
+   ```python
+   model = sm.GEE(
+      nhefs.death,
+      nhefs[['constant', 'qsmk']],
+      groups=nhefs.seqn,
+      weights=s_weights,
+      family=sm.families.Binomial()
+  )
+  res = model.fit()
+  res.summary().tables[1]
 
-## odd ratio
-est = np.exp(res.params.qsmk)
-conf_ints = res.conf_int(alpha=0.05, cols=None)
-lo = np.exp(conf_ints[0]['qsmk'])
-hi = np.exp(conf_ints[1]['qsmk'])
+  ## odd ratio
+  est = np.exp(res.params.qsmk)
+  conf_ints = res.conf_int(alpha=0.05, cols=None)
+  lo = np.exp(conf_ints[0]['qsmk'])
+  hi = np.exp(conf_ints[1]['qsmk'])
 
-print('           estimate   95% C.I.')
-print('odds ratio  {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
- ```
+  print('           estimate   95% C.I.')
+  print('odds ratio  {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
+   ```
 
 ## 12.5 Effect modification and marginal structural models
-Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification. Suppose it is hypothesized that the effect of smoking cessation varies by sex V (1: woman, 0: man). To examine this hypothesis, we add the covariate V to our marginal structural mean model: <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}Va %2B \beta_{3}V">. If <img src="https://render.githubusercontent.com/render/math?math=\beta_{2} \neq 0"> additive effect modification is present.
+Add **covariates V** (which may be non-confounders) in **a marginal structual model** to assess effect modification. 
+
+Example: 
+- Suppose it is hypothesized that the effect of smoking cessation varies by sex V (1: woman, 0: man). To examine this hypothesis, we add the covariate V to our marginal structural mean model: <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}Va %2B \beta_{3}V">. If <img src="https://render.githubusercontent.com/render/math?math=\beta_{2} \neq 0"> additive effect modification is present.
 
 Estimate the model parameters:
-- Fit the linear regression model via weighted least square IP weights.
-- The vector of covariates L needs to include V -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V
-- <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=W^{A} = f[A]/f[A|L]">
-```python
-## Create the numerator of the IP weights. Reuse the basic weights for the denominator.
-numer = logit_ip_f(nhefs.qsmk, nhefs[['constant', 'sex']])
-sw_AV = numer * weights
+- Fit the linear regression model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A, V] = \theta_{0} %2B \theta_{1}a %2B \theta_{2}Va %2B \theta_{3}V"> via weighted least square IP weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=W^{A} = f[A]/f[A|L]">, We estimate <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V)"> using the same approach as for <img src="https://render.githubusercontent.com/render/math?math=SW^{A}">, except that we add the covariate V to the logistic model for the numerator of the weights.
+- The vector of covariates L needs to include V -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V.
+  ```python
+  ## program 12.6
+  ## Create the numerator (f[A|V]) of the IP weights. Reuse the basic weights (1/f[A|L]) for the denominator.
+  numer = logit_ip_f(nhefs.qsmk, nhefs[['constant', 'sex']])
+  sw_AV = numer * weights
 
-## 
-nhefs['qsmk_and_female'] = nhefs.qsmk * nhefs.sex
+  ## AV
+  nhefs['qsmk_and_female'] = nhefs.qsmk * nhefs.sex
 
-model = sm.WLS(
-    nhefs.wt82_71,
-    nhefs[['constant', 'qsmk', 'sex', 'qsmk_and_female']],
-    weights=sw_AV
-)
-res = model.fit(cov_type='cluster', cov_kwds={'groups': nhefs.seqn})
-res.summary().tables[1]
-```
+  model = sm.WLS(
+      nhefs.wt82_71,
+      nhefs[['constant', 'qsmk', 'sex', 'qsmk_and_female']], ## constant, A, V, AV
+      weights=sw_AV
+  )
+  res = model.fit(cov_type='cluster', cov_kwds={'groups': nhefs.seqn})
+  res.summary().tables[1]
+  ```
 
 ## 12.6 Censoring and missing data
 ```
