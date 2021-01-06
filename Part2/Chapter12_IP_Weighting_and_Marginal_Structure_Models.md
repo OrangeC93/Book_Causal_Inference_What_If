@@ -110,7 +110,7 @@ Marginal structual models: models for the marginal mean of a counterfactual outc
 (this is a saturated marginal structural mean model for a dichotomous treatment A)
 
 Recall the basic concept:
-- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model can be endowed with the same causual interpretation as the parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model.
+- We used IP weighting to construct a pseudo-population, and then fit the model <img src="https://render.githubusercontent.com/render/math?math=E[Y|A] = \theta_{0} %2B \theta_{1}A"> to the pseudo-population data by using IP weighted least squares. Under our assumptions, association is causation in the pseudo-population. That is, the **parameter <img src="https://render.githubusercontent.com/render/math?math={\theta}_{1}">  from IP weighted associational model** can be endowed with the same causual interpretation as the **parameter <img src="https://render.githubusercontent.com/render/math?math={\beta}_{1}"> from the structual model**.
 
 Example: continous treatment A “change in smoking intensity” defined as number of cigarettes smoked per day in 1982 minus number of cigarettes smoked per day at baseline. We are interested in estimating the difference in average weight change under different changes in treatment intensity in the 1162 individuals who smoked 25 or fewer cigarettes per day at baseline.
 
@@ -120,8 +120,61 @@ Example: continous treatment A “change in smoking intensity” defined as numb
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}]">
   - <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=20}] - E[Y^{a=0}] = 20\beta_{1} %2B 400\beta_{2}">
 - Estimate stabilized weights <img src="https://render.githubusercontent.com/render/math?math=SW^{A}=f(A)/f(A|L)">
-  - For a continuous treatment A, <img src="https://render.githubusercontent.com/render/math?math=f(A|L)"> is the probability density function, which is hard to estimate correctly.
-  - We need to use a linear regression model to estimate the mean and variance of residuals for all combinations of values of L.
+  - For a continuous treatment A, <img src="https://render.githubusercontent.com/render/math?math=f(A|L)"> is the probability density function, which is hard to estimate correctly. we need to use a linear regression model to estimate the mean and variance of residuals for all combinations of values of L.
+  ```python
+  ## program 12.5
+  fAL = scipy.stats.norm.pdf(
+    A,                        # A
+    A_pred,                   # mu = E[A|L]
+    np.sqrt(res.mse_resid)    # sigma)
+  fA = scipy.stats.norm.pdf(A, A.mean(), A.std())
+  sw = fA / fAL
+  
+  ## fit marginal structural model
+  y = intensity25.wt82_71
+  X = pd.DataFrame(OrderedDict((
+    ('constant', np.ones(y.shape[0])),
+    ('A', A),
+    ('A^2', A**2))))
+
+  model = sm.GEE(
+      y,
+      X,
+      groups=intensity25.seqn,
+      weights=sw
+  )
+  res = model.fit()
+  
+  ## get confidence interval
+  from statsmodels.regression._prediction import get_prediction
+  pred_inputs = [
+    [1, 0, 0],       # no change in smoking intensity
+    [1, 20, 20**2],  # plus 20 cigarettes / day]
+  pred = get_prediction(res, exog=pred_inputs)
+  summary = pred.summary_frame().round(1)
+  summary[["mean", "mean_ci_lower", "mean_ci_upper"]]
+  ```
+  - For a dichotomous outcome: "if interested in the causal effect of quitting smoking A (1: yes, 0: no) on the risk of death D (1: yes, 0: no) by 1982, one could consider a _marginal structural logistic model_"
+ ```python
+ model = sm.GEE(
+    nhefs.death,
+    nhefs[['constant', 'qsmk']],
+    groups=nhefs.seqn,
+    weights=s_weights,
+    family=sm.families.Binomial()
+)
+res = model.fit()
+res.summary().tables[1]
+
+## odd ratio
+est = np.exp(res.params.qsmk)
+conf_ints = res.conf_int(alpha=0.05, cols=None)
+lo = np.exp(conf_ints[0]['qsmk'])
+hi = np.exp(conf_ints[1]['qsmk'])
+
+print('           estimate   95% C.I.')
+print('odds ratio  {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
+ ```
 
 ## 12.5 Effect modification and marginal structural models
 Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification:
@@ -130,7 +183,7 @@ Add covariates V (which may be non-confounders) in a marginal structual model to
 Estimate the model parameters:
 - Fit the linear regression model via weighted least square IP weights,
 - The vector of covariates L needs to include V -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V
-- <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L] or SW^{A}(V) = f[A]/f[A|L]">
+- <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A]/f[A|L]">
 
 ## 12.6 Censoring and missing data
 ```
