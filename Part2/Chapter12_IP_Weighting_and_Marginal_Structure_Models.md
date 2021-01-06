@@ -177,13 +177,28 @@ print('odds ratio  {:>6.2f}   ({:>0.1f}, {:>0.1f})'.format(est, lo, hi))
  ```
 
 ## 12.5 Effect modification and marginal structural models
-Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification:
-- <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}Va %2B \beta_{3}V">
+Add covariates V (which may be non-confounders) in a marginal structual model to assess effect modification. Suppose it is hypothesized that the effect of smoking cessation varies by sex V (1: woman, 0: man). To examine this hypothesis, we add the covariate V to our marginal structural mean model: <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a}|V] = \beta_{0} %2B \beta_{1}a %2B \beta_{2}Va %2B \beta_{3}V">. If <img src="https://render.githubusercontent.com/render/math?math=\beta_{2} \neq 0"> additive effect modification is present.
 
 Estimate the model parameters:
-- Fit the linear regression model via weighted least square IP weights,
+- Fit the linear regression model via weighted least square IP weights.
 - The vector of covariates L needs to include V -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V
 - <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A|V]/f[A|L]"> or <img src="https://render.githubusercontent.com/render/math?math=SW^{A}(V) = f[A]/f[A|L]">
+```python
+## Create the numerator of the IP weights. Reuse the basic weights for the denominator.
+numer = logit_ip_f(nhefs.qsmk, nhefs[['constant', 'sex']])
+sw_AV = numer * weights
+
+## 
+nhefs['qsmk_and_female'] = nhefs.qsmk * nhefs.sex
+
+model = sm.WLS(
+    nhefs.wt82_71,
+    nhefs[['constant', 'qsmk', 'sex', 'qsmk_and_female']],
+    weights=sw_AV
+)
+res = model.fit(cov_type='cluster', cov_kwds={'groups': nhefs.seqn})
+res.summary().tables[1]
+```
 
 ## 12.6 Censoring and missing data
 ```
