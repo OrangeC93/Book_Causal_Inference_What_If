@@ -86,3 +86,5 @@ info = nonparametric_bootstrap(
 print('         estimate   95% C.I.')
 print('effect    {:>5.1f}    ({:>0.1f}, {:>0.1f})'.format(info[0], info[1][0], info[1][1]))
 ```
+## Reference
+https://dango.rocks/blog/2019/01/20/Causal-Inference-Introduction2-Propensity-Score-Matching/
