@@ -1,6 +1,7 @@
 IP weighting, standardization, and g-estimation are often collectively referred to as g-methods because they are designed for application to generalized treatment contrasts involving treatments that vary over time.
 
 There is a reason for introducing g-estimation later is that: describing g-estimation is facilitated by the specification of a structural model, even if the model is saturated. Models whose parameters are estimated via g-estimation are known as structural nested models. 
+https://towardsdatascience.com/g-computation-in-causal-inference-774099da3631
 
 ## 14.1 The causal question revisited
 ```
