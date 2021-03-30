@@ -1,5 +1,5 @@
 ## 12.1 The causal question
-Goal： estimate the average causal effect of smoking cessation A on weight gain Y.
+Goal: estimate the average causal effect of smoking cessation A on weight gain Y.
 
 Here we assume that the following 9 variables, all measured at baseline, are sufficient to adjust for confounding: 
 - sex (0: male, 1: female)
@@ -12,11 +12,11 @@ Here we assume that the following 9 variables, all measured at baseline, are suf
 That is, L represents a vector of 9 measured covariates. 
 
 ## 12.2 Estimating IP weights via modeling
-IP weighting creates a pseudo-population in which the arrow from the covariates L to the treatment A is removed. More precisely:
+IP weighting creates a pseudo-population in which the arrow from the covariates L to the treatment A is removed, which means:
 - A and L are statistically independent 
 - The mean <img src="https://render.githubusercontent.com/render/math?math=E_{ps}[Y|A=a]"> in the pseudo-population equals the standardized <img src="https://render.githubusercontent.com/render/math?math=E[Y|A=a, L=l]Pr[L=l]"> in the actual population.
 
-Here we cannot estimated the quantiy <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|L]"> nonparametrically due to the curse of dimensionality: we simply counted how many people were treated(A=1) in each stratum of L, and then divided this count by the number of individuals in the stratum. 
+Here we cannot estimated the quantiy <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|L]"> nonparametrically (we simply counted how many people were treated(A=1) in each stratum of L, and then divided this count by the number of individuals in the stratum) due to the curse of dimensionality.
 
 Basic steps:
 - Obtain parametric estimates of <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|L]"> in each of the millions of strata defined by L
