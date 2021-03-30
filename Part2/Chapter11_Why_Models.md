@@ -8,7 +8,7 @@ A nonparametric estimators of the conditional mean function as those that produc
 **Santurated Models**
 - Models which do not impose restriction on the distrubtion of the data are saturated models. 
 - A saturated model has the same number of unknowns on both sides of the euqal sign.
-- Eg. E[Y|A=a] for a dichotomous treatment
+- Eg.  <img src="https://render.githubusercontent.com/render/math?math=E[Y|A=a]"> for a dichotomous treatment
 
 code: [Section 11.3](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter11.ipynb)
 ## 11.4 Smoothing
