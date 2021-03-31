@@ -1,7 +1,8 @@
 IP weighting, standardization, and g-estimation are often collectively referred to as g-methods because they are designed for application to generalized treatment contrasts involving treatments that vary over time.
 
-There is a reason for introducing g-estimation later is that: describing g-estimation is facilitated by the specification of a structural model, even if the model is saturated. Models whose parameters are estimated via g-estimation are known as structural nested models. 
-https://towardsdatascience.com/g-computation-in-causal-inference-774099da3631
+There is a reason for introducing g-estimation later is that: describing **g-estimation** is facilitated by the specification of a **structural model**, even if the model is **saturated**. Models whose parameters are estimated via g-estimation are known as **structural nested models**. 
+
+Reference: https://towardsdatascience.com/g-computation-in-causal-inference-774099da3631
 
 ## 14.1 The causal question revisited
 ```
@@ -14,6 +15,10 @@ In this chapter we will use g-estimation to estimate the average causal effect o
 
 ## 14.2 Exchangeability revisited
 When conditional exchangeability holds, knowing the value of <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}"> does not help differentiate between quitters and nonquitters with a particular value of L. That is, the conditional (on L) probability of being a quitter is the same for all values of the counterfactual outcome <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}">. Mathematically, we write <img src="https://render.githubusercontent.com/render/math?math=Pr[A=1|Y^{a=0}, L] = Pr[A=1|L]">.
+
+Suppose we propose the parametric logistic model fro the probabiliity of treatment:
+<img src="https://render.githubusercontent.com/render/math?math=logitPr[A=1|Y^{a=0}, L] = \alpha_{0} %2B \alpha_{1}Y^{a=0} %2B \alpha_{2}L">
+- <img src="https://render.githubusercontent.com/render/math?math=\alpha_{1}"> should be zero because <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0}"> does not predict A conditional on L.
 
 ## 14.3 Structural nested mean models
 Structural nested mean model: 
