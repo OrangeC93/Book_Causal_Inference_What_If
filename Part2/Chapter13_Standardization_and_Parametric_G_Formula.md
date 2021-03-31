@@ -11,26 +11,31 @@ To obtain parametric estimates of <img src="https://render.githubusercontent.com
 ## 13.3 Standardizing the mean outcome to the confounder distribution
 Steps: expansion of dataset, outcome modeling, prediction, and standardized by averaging.
 
-- Expansion of Dataset: (add a product term AL to make the model saturated)
-  - First block: same as the original dataset (Y, A, L, AL)
-  - Second block: set value A to 0 (untreated) for all rows, delete the outcome for all individuals (Y, 0, L, 0)
-  - Second block: set value A to 1 (treated) for all rows (Y, 1, L, L)
+- Expansion of Dataset: 
+  - 1st block: same as the original dataset (1, A, L, AL)
+  - 2nd block: set value A to 0 (untreated) for all rows, delete the outcome for all individuals (1, 0, L, 0)
+  - 3rd block: set value A to 1 (treated) for all rows (1, 1, L, L)
 
-- Outcome modeling:
-  - Use the first block(actual data) to fit a regression model for the mean outcome Y given A and L
+- Outcome modeling: (add a product term AL to make the model saturated)
+  - Use the 1st block(actual data) to fit a regression model for the mean outcome Y given A and L
 
 - Prediction:
-  - Use the parameter estimates from the first block to predict the outcome values for all rows in the second and third blocks
-  - The predicted outcome values for the second block are the mean estimates for each combination of values of L and A = 0, and the predicted values for the third block are the mean estimates for each combinations of values of L and A = 1
+  - Use the parameter estimates from the 1st block to predict the outcome values for all rows in the 2nd and 3rd blocks
+  - The predicted outcome for the 2nd block are the mean estimates for each combinations of values of L and A = 0
+  - The predicted outcome for the 3rd block are the mean estimates for each combinations of values of L and A = 1
 
 - Averaging: we compute the average of all predicted values in the second block (precisely the standardized mean outcome in the untreated) and third block (precisely the standardized mean outcome in the treated)
 
 - Confidence interval: use bootstrap to calculate the confidence interval on the previous estimate
 
+Code: 
+- [program 13.2](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter13.ipynb)
+- [program 13.4 using bootstrap](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter13.ipynb)
 ## 13.4 IP weighting or standardization
+- IP weighting: treatment model, standardization: outcome model
 - Large differences between the IP weighted and standardized estimate will alert us to the presence of serious model misspecification in at least one of the estimates. Small differences do not guarantee absence of serious model misspecification, but will be reassuring–though logically possible, it is unlikely that badly misspecified models resulting in bias of similar magnitude and direction for both methods.
-- Often there is no need to choose between IP weighting and the parametric g-formula. When both methods can be used to estimate a causal effect, just use both methods. 
 - Both IP weighting and standardization are estimators of the g-formula, a general method for causal inference first described in 1986. We say that standardization is a plug-in g-formula estimator because it simply replaces the conditional mean outcome in the g-formula by its estimates.
+- Often there is no need to choose between IP weighting and the parametric g-formula. When both methods can be used to estimate a causal effect, just use both methods. 
 
 ## 13.5 How seriously do we take our estimates?
 Observational effect estimates are always open to serious crticism, the validity of our estimates for the target population requires many conditions: 
@@ -40,38 +45,3 @@ Observational effect estimates are always open to serious crticism, the validity
 
 Therefore a healthy skepticism of causal inferences drawn from observational data is necessary.
 
-## Code Chapter 13 
-Program 13.4: Use bootstrap to calculate causal effect and the confidence interval
-
-``` python
-boot_samples = []
-common_X = [
-    'one', 'sex', 'race', 'edu_2', 'edu_3', 'edu_4', 'edu_5', 
-    'exercise_1', 'exercise_2', 'active_1', 'active_2',
-    'age', 'age^2', 'wt71', 'wt71^2',
-    'smokeintensity', 'smokeintensity^2', 'smokeyrs', 'smokeyrs^2'
-]
-
-for _ in range(2000):
-    sample = nhefs.sample(n=nhefs.shape[0], replace=True)
-    
-    y = sample.wt82_71
-    X = sample[common_X + ['qsmk', 'qsmk_x_smokeintensity']] ## add a product term to make the model saturated
-    block2 = sample[common_X + ['zero', 'zero']] ## if every one is untreated
-    block3 = sample[common_X + ['one', 'smokeintensity']] ## if every one is untreated
-    
-    result = sm.OLS(y, X).fit()
-    
-    block2_pred = result.predict(block2)
-    block3_pred = result.predict(block3)
-    
-    boot_samples.append(block3_pred.mean() - block2_pred.mean())
-
-std = np.std(boot_samples)
-
-lo = est_diff - 1.96 * std
-hi = est_diff + 1.96 * std
-
-print('               estimate   95% C.I.')
-print('causal effect   {:>6.1f}   ({:>0.1f}, {:>0.1f})'.format(est_diff, lo, hi))
-```
