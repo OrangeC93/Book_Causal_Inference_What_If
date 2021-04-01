@@ -12,22 +12,26 @@ A common approach to outcome regression is to assume that there is no effect mod
 
 Code: [Program 15.1](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter15.ipynb)
 ## 15.2 Propensity scores
-Propensity score: π(L) measures the propensity of individuals to receive treatment A given the information available in the covariates L. If the distribution of π(L) were the same for the treated A = 1 and the untreated A = 0, then there would be no confounding due to L, i.e., there would be no open path from L to A on a causal diagram. 
+Propensity score: π(L) measures the propensity of individuals to receive treatment A given the information available in the covariates L. If the distribution of π(L) were the same for the treated and the untreated , then there would be no confounding due to L, 
+- i.e., there would be no open path from L to A on a causal diagram. 
 
 Under exchangeability and positivity within levels of the propensity score π(L), the propensity score can be used to estimate causal effects using stratification (including outcome regression), standardization, and matching.
 
-We only consider propensity scores for dichotomous treatmetns. Propensity score methods, other thant IP weighting and g-estimaton an other related doubly-robust estimators, are difficult to generalize to non-dichotomous treatment. 
+Note that we **only consider propensity scores for dichotomous treatmetns**. Propensity score methods, other thant IP weighting and g-estimaton an other related doubly-robust estimators, are difficult to generalize to non-dichotomous treatment. 
  ## 15.3 Propensity stratification and standardization
-When our parametric assumptions for <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, π(L)]"> are correct, plus exchangeability and positivity hold, the model estimates the average causal effects within all levels s of the propensity score <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}|\pi(L)=s] - E[Y^{a=0, c=0}|\pi(L)=s]">. 
+When our parametric assumptions for <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, \pi(L)]"> are correct, plus exchangeability and positivity hold, the model estimates the average causal effects within all levels s of the propensity score <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}|\pi(L)=s] - E[Y^{a=0, c=0}|\pi(L)=s]">. 
 
-If we were interested in the average causal effect in the entire study population <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}] - E[Y^{a=0, c=0}]">, we would standardize the conditional means <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, π(L)]"> by using the distribution of propensity score. The procedure is the same one described in Chapter 13 for continuous variables, except that we replace the variables L by the estimated π(L). Note that the procedure can naturally incorporate a product term between treatment A and the estimated π(L) in the outcome model. 
+If we were interested in the average causal effect in the entire study population <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}] - E[Y^{a=0, c=0}]">, we would standardize the conditional means <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, \pi(L)]"> by using the distribution of propensity score. The procedure is the same one described in Chapter 13 for continuous variables, **except that we replace the variables L by the estimated π(L)**. 
+
+Note that the procedure can naturally incorporate a product term between treatment A and the estimated π(L) in the outcome model. 
 
 ## 15.4 Propensity matching
 There are many forms of propensity matching. All of them attempt to form a matched population in which the treated and the untreated are exchaneable because they have the same distribution of π(L).
-- For example, one can match the untreated to the treated: each treated individual is paired with one (or more) untreated individuals with the same propensity score value. The subset of the original population comprised by the treated-untreated pairs (or sets) is the **matched population**.
-- Other than exact match, a common approach is to define a closeness in propensity matching, which entails a bias-variance trade-off. If the closeness is too loose, the distribution of π(L) will differ between the treated and the untreated in the matched population, exchangeability fill not hold. On the other hand, exchangeability might be held but effect estimate may have wider 95% confidence intervals.
+- For example, one can match the untreated to the treated: each treated individual is paired with one (or more) untreated individuals with the same propensity score value. 
+- Other than **exact match**, a common approach is to define a **closeness** in propensity matching, which entails a bias-variance trade-off. If the closeness is too loose, the distribution of π(L) will differ between the treated and the untreated in the matched population, exchangeability fill not hold. On the other hand, exchangeability might be held but effect estimate may have wider 95% confidence intervals.
 - Matching does not distinguish between random and structural nonpositivity.
-- Propensity may yield a hard-to-describe subset of the study population in practice. 
+
+Note: Propensity may yield a hard-to-describe subset of the study population in practice. 
 
 ## 15.5 Propensity models, structural models, predictive models
 Propensity models: Propensity models are models for the probability of treatment A given the variables L used to try to achieve conditional exchangeability.
