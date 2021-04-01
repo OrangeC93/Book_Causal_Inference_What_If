@@ -18,13 +18,15 @@ Propensity score: π(L) measures the propensity of individuals to receive treatm
 Under exchangeability and positivity within levels of the propensity score π(L), the propensity score can be used to estimate causal effects using stratification (including outcome regression), standardization, and matching.
 
 Note that we **only consider propensity scores for dichotomous treatmetns**. Propensity score methods, other thant IP weighting and g-estimaton an other related doubly-robust estimators, are difficult to generalize to non-dichotomous treatment. 
+
+Code: [Program 15.2](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter15.ipynb)
  ## 15.3 Propensity stratification and standardization
 When our parametric assumptions for <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, \pi(L)]"> are correct, plus exchangeability and positivity hold, the model estimates the average causal effects within all levels s of the propensity score <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}|\pi(L)=s] - E[Y^{a=0, c=0}|\pi(L)=s]">. 
 
 If we were interested in the average causal effect in the entire study population <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1, c=0}] - E[Y^{a=0, c=0}]">, we would standardize the conditional means <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0, \pi(L)]"> by using the distribution of propensity score. The procedure is the same one described in Chapter 13 for continuous variables, **except that we replace the variables L by the estimated π(L)**. 
 
 Note that the procedure can naturally incorporate a product term between treatment A and the estimated π(L) in the outcome model. 
-
+Code: [Program 15.3, Program 15.4](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter15.ipynb)
 ## 15.4 Propensity matching
 There are many forms of propensity matching. All of them attempt to form a matched population in which the treated and the untreated are exchaneable because they have the same distribution of π(L).
 - For example, one can match the untreated to the treated: each treated individual is paired with one (or more) untreated individuals with the same propensity score value. 
