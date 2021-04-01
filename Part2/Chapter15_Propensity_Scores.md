@@ -1,14 +1,16 @@
 ## 15.1 Outcome regression
-We have described IP weighting, standardization, and g-estimation to estimate the average causal effect of smoking cessation (the treatment) A on weight gain (the outcome) Y . We also described how to estimate the average causal effect within subsets of the population, either by restricting the analysis to the subset of interest or by adding product terms in marginal structural models (Chapter 12) and structural nested models (Chapter 14). 
-```
-https://towardsdatascience.com/causal-inference-in-data-science-g-estimation-of-structural-nested-models-d11b1e3c9360
-Structural Nested Models are a class of semi-parametric models
-generally require fewer parametric assumptions than the g-formula or Marginal Structural Models 
-Therefore are less prone to parametric misspecification).
-```
-- Structural nested models: These models include parameters for the product terms between treatment A and the variables L, but no parameters for the variables L themselves. This is an attractive property of structural nested models because we are interested in the causal effect of A on Y within levels of L but not in the (noncausal) relation between L and Y . A method– g-estimation of structural nested models–that is agnostic about the functional form of the L-Y relation is protected from bias due to misspecifying this relation.
-- Structural model <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}|L]=\beta _{0}%2B\beta _{1}a%2B\beta_{2}aL%2B\beta_{3}L"> where <img src="https://render.githubusercontent.com/render/math?math=\beta_{2}"> and <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> are vector parameters. The average causal effects of smoking cessation A on weight gain Y in each stratum of L are a function of <img src="https://render.githubusercontent.com/render/math?math=\beta_{1}"> and <img src="https://render.githubusercontent.com/render/math?math=\beta_{2}">, the mean counterfactual outcomes under no treatment in each stratum of L are a function of <img src="https://render.githubusercontent.com/render/math?math=\beta_{0}"> and <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}">. The parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> is usually referred as the main effect of L, but the use of the word effect is misleading because <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> may not have an interpretation as the causal effect of L (there may be confounding for L). The parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> simply quantifies how the mean of the counterfactual <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0, c=0}"> varies as a function of L.
+We have described IP weighting, standardization, and g-estimation to estimate the average causal effect of smoking cessation (the treatment) A on weight gain (the outcome) Y . 
 
+We also described how to estimate the average causal effect within subsets of the population, either by restricting the analysis to the subset of interest or by adding product terms in marginal structural models (Chapter 12) and structural nested models (Chapter 14). 
+
+- Structural nested models: These models include parameters for the product terms between treatment A and the variables L, but no parameters for the variables L themselves. This is an attractive property of structural nested models because we are interested in the causal effect of A on Y within levels of L but not in the (noncausal) relation between L and Y . 
+- Structural model <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a,c=0}|L]=\beta _{0}%2B\beta _{1}a%2B\beta_{2}aL%2B\beta_{3}L">.
+  - The average causal effects of smoking cessation A on weight gain Y in each stratum of L are a function of <img src="https://render.githubusercontent.com/render/math?math=\beta_{1}"> and <img src="https://render.githubusercontent.com/render/math?math=\beta_{2}">
+  - The mean counterfactual outcomes under no treatment in each stratum of L are a function of <img src="https://render.githubusercontent.com/render/math?math=\beta_{0}"> and <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}">. The parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> is usually referred as the main effect of L, but the use of the word effect is misleading because <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> may not have an interpretation as the causal effect of L (there may be confounding for L). The parameter <img src="https://render.githubusercontent.com/render/math?math=\beta_{3}"> simply quantifies how the mean of the counterfactual <img src="https://render.githubusercontent.com/render/math?math=Y^{a=0, c=0}"> varies as a function of L.
+  - Under exchageablity, It can also be written as <img src="https://render.githubusercontent.com/render/math?math=E[Y|A,C=0,L]=\beta _{0}%2B\beta _{1}a%2B\beta_{2}aL%2B\beta_{3}L">. **If the variables L are sufficient to adjust for counfounding (and selection bias) and the outcome model is correcly specified, no further adjustment is needed. The parameters of the regression model equal to the parameters of the structural model.**
+
+A common approach to outcome regression is to assume that there is no effect modification by any variable in L.
+Code: [Program 15.1](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter15.ipynb)
 ## 15.2 Propensity scores
 Propensity score: π(L) measures the propensity of individuals to receive treatment A given the information available in the covariates L. If the distribution of π(L) were the same for the treated A = 1 and the untreated A = 0, then there would be no confounding due to L, i.e., there would be no open path from L to A on a causal diagram. Under exchangeability and positivity within levels of the propensity score π(L), the propensity score can be used to estimate causal effects using stratification (including outcome regression), standardization, and matching.
 
@@ -33,64 +35,7 @@ Structural models: Structural models describe the relation between the treatment
   - If all variables L are included as possible effect modifiers then the marginal structural model becomes a faux marginal structural model.
 - Structural nested models: include parameters for treatment and for product terms between treatment A and all variables in L that are effect modifiers.
 
-## Code Chapter 15
-Program 15.4
-```python
-formula = (
-    'qsmk ~ sex + race + age + I(age**2) + C(education)'
-    '     + smokeintensity + I(smokeintensity**2) + smokeyrs + I(smokeyrs**2)'
-    '     + C(exercise) + C(active) + wt71 + I(wt71**2)'
-) ## no product term
-
-model = sm.Logit.from_formula(formula, data=nhefs_all) 
-res = model.fit(disp=0)
-
-propensity = res.predict(nhefs_all)
-nhefs['propensity'] = propensity[~nhefs_all.wt82_71.isnull()]
-
-model = sm.OLS.from_formula('wt82_71 ~ qsmk + propensity', data=nhefs)
-res = model.fit()
-res.summary().tables[1]
-
-
-def outcome_regress_effect(data):
-    model = sm.OLS.from_formula('wt82_71 ~ qsmk + propensity', data=data)
-    res = model.fit()
-    
-    data_qsmk_1 = data.copy()
-    data_qsmk_1['qsmk'] = 1
-    
-    data_qsmk_0 = data.copy()
-    data_qsmk_0['qsmk'] = 0
-    
-    mean_qsmk_1 = res.predict(data_qsmk_1).mean()
-    mean_qsmk_0 = res.predict(data_qsmk_0).mean()
-    
-    return mean_qsmk_1 - mean_qsmk_0
-    
-def nonparametric_bootstrap(data, func, n=1000):
-    estimate = func(data)
-    
-    n_rows = data.shape[0]
-    indices = list(range(n_rows))
-    
-    b_values = []
-    for _ in tqdm(range(n)):
-        data_b = data.sample(n=n_rows, replace=True)
-        b_values.append(func(data_b))
-    
-    std = np.std(b_values)
-    
-    return estimate, (estimate - 1.96 * std, estimate + 1.96 * std)
-    
-data = nhefs[['wt82_71', 'qsmk', 'propensity']]
-info = nonparametric_bootstrap(
-    data, outcome_regress_effect, n=2000
-)
-
-
-print('         estimate   95% C.I.')
-print('effect    {:>5.1f}    ({:>0.1f}, {:>0.1f})'.format(info[0], info[1][0], info[1][1]))
-```
 ## Reference
-https://dango.rocks/blog/2019/01/20/Causal-Inference-Introduction2-Propensity-Score-Matching/
+- https://dango.rocks/blog/2019/01/20/Causal-Inference-Introduction2-Propensity-Score-Matching/
+- https://towardsdatascience.com/causal-inference-in-data-science-g-estimation-of-structural-nested-models-d11b1e3c9360
+ - Structural Nested Models are a class of semi-parametric models generally require fewer parametric assumptions than the g-formula or Marginal Structural Models. Therefore are less prone to parametric misspecification.
