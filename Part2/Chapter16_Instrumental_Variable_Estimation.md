@@ -46,6 +46,19 @@ Another way: two-stage-least squared estimator
 Code: [Program 16.1, Program 16.2, Program 16.3](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter16.ipynb)
 
 ## 16.3 A fourth identifying condition: homogeneity
+There're four possible homogeneity conditions(iv) in order of historical appearance.
+-  Constant effect of treatment A on outcome Y acrass individuals.
+-  For dichotomous Z and A is eauality of the average causal effect of A on Y across levels of Z in both the treated and in the untreated: i.e. <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1}-Y^{a=0}|Z=1, A=a] = E[Y^{a=1}-Y^{a=0}|Z=0, A=a]">.
+-  Homogeneity conditions would be stated in terms of effect modification by possible known (even if unmeasured) confounders U: <img src="https://render.githubusercontent.com/render/math?math=E[Y^{a=1}|U] - E[Y^{a=0}|U]= E[Y^{a=1}-Y^{a=0}]"> or the average cusal effect of A on Y is the same at every level of the unmeasured coufounder U.
+-  A-Z association on the additive scale is constant across levels of the confounders U, i.e. <img src="https://render.githubusercontent.com/render/math?math=E[A|Z=1,U] - E[A|Z=0,U]= E[A|Z=1] - E[A|Z=0]">
+
+Because of the perceived implausibility of the homogeneity conditions in many settings, there are two approaches that bypass the homogeneity conditions:
+- One approach is the introduction of baseline covariates in the models for IV estimation. To do so, it is safer to use structural mean models, which impose fewer parametric assumptions than two-stage-linear-squares estimators. The inclusion of covariates in a structural mean model allows the treatment effect in the treated to vary with Z by imposing constraints on how the treatment effect varies within levels of the covariates.
+ 
+- Another approach is to use an alternative condition (iv) that does not require effect homogeneity.
+
+
+
 ## 16.4 An alternative forth condition: monotonity
 ## 16.5 The three instumental conditions revisited
 ## 16.6 Instrumental variable estimation vs other methods
