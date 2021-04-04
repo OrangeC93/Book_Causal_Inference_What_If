@@ -15,6 +15,9 @@ In survival analysis we need to use other measures that can accommodate administ
 ## 17.2 From hazard to risk
 The new dataset: (1)each row of the database corresponds to a person-time, the 1st row contains the informtion for person1 at k=0, etc. (2) define a time-varying indicator of event Dk, for each person at each month k, the indicator Dk takes value 1 if T<=k and 0 if T>k. 
 
-![image](/img/lr_harzrd.png)
+![image](/img/lr_harzard.png)
 
+- <img src="https://render.githubusercontent.com/render/math?math=\theta_{0,k}"> is a time-varying intercept that can be estimated by some flexible function of time such as <img src="https://render.githubusercontent.com/render/math?math=\theta_{0,k} = \theta_{0} %2B + \theta_{4}k %2B \theta_{5}k^{2}">
+- The flexible time-varying treatment A and the product terms between treatment and time allow the harzard ratio to vary over time. 
 
+Code: [Program 17.2](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter17.ipynb)
