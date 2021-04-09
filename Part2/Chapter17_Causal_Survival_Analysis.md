@@ -1,4 +1,4 @@
-## Harzards and risks
+## 17.1 Harzards and risks
 The administrative end of follow-up: most follow-up studies have a date after which there is no information on any individuals.
 - Example: the month of death T can take values subsequent from 1 (January 1983) to 120 (December 1992). T is known for 102 treated (A = 1) and 216 untreated (A = 0) individuals who died during the follow-up, and is administratively censored (that is, all we know is that it is greater than 120 months) for the remaining 1311 individuals.
   - Survival curves code: [Program 17.1](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter17.ipynb)
@@ -29,3 +29,24 @@ Code: [Program 17.2](https://github.com/OrangeC93/Book_Causal_Inference_What_If/
 Define a time-varying indicator <img src="https://render.githubusercontent.com/render/math?math=C_{k}"> for censoring by time k. For each person at each month k, the indicator <img src="https://render.githubusercontent.com/render/math?math=C_{k}"> takes value 0 if the administrative end of follow-up is greater than k and takes value 1 otherwise.
 
 Under randomly assigned censoring, the survival at k is <img src="https://render.githubusercontent.com/render/math?math=\sum_{m=1}^kPr[D_{m}=0|D_{m-1}=0, C_{m}=0, A=a]"> for <img src="https://render.githubusercontent.com/render/math?math=k"> < <img src="https://render.githubusercontent.com/render/math?math=k_{end}">, the estimation procedure is th same as described above (1) use a nonparametric estimate of or (2) fit a logistic model for, the cause-specific hazard <img src="https://render.githubusercontent.com/render/math?math=Pr[D_{k%2B1}=0|D_{k}=0, C_{k%2B1}=0, A=a]">
+
+## 17.4 IP weighting of marginal structurdal models
+Firstly, estimate the stablized IP weight <img src="https://render.githubusercontent.com/render/math?math=SW_{A}"> for each individual in the study population, in which the variables in L are independent from the treatment A, which eliminates confounding by those variables. 
+
+Second, using person-time data formate, fit a hazards model that individuals are weighted by the estimated weights.
+
+In our example, L includes the variables sex, age, race, education, intensity and duration of smoking, physical activity in daily life, recreational exercise, and weight. The 120-month survival estimates were 80.7% under smoking cessation and 80.5% under no smoking cessation; difference 0.2% (95% confidence interval from −4.1% to 3.7% based on 500 bootstrap samples). That is, after adjustment for the covariates  via IP weighting, we found little evidence of an effect of smoking cessation on mortality at any time during the follow-up.
+
+
+Code: [Program 17.3](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter17.ipynb)
+
+## 17.5 The parametric g-formula, standardization
+First, estimate the conditional survivals <img src="https://render.githubusercontent.com/render/math?math=Pr[D_{k+1}=0|L=l, A=a]"> with the variables in L as covariates using our administratively censored data. 
+
+Second, compute their weighted average over all values l of the covariates L.
+
+In our example, the 120- month survival estimates were 80.4% under smoking cessation and 80.6% under no smoking cessation; difference 02% (95% confidence interval from −4.6% to 4.1%). That is, after adjustment for the covariates L via standardization, we found little evidence of an effect of smoking cessation on mortality at any time during the follow-up.
+
+Code: [Program 17.4](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter17.ipynb)
+## 17.6 G-estimation of structural nested models
+Code: [Program 17.5](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter17.ipynb)
