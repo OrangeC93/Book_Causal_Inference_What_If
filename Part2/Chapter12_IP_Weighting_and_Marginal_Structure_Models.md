@@ -83,6 +83,11 @@ continous | marginal structural non-saturated logistic model | marginal structur
 - continous X, ip weighting will be calcuated from pdf
 
 ## 12.5 Effect modification and marginal structural models
+[Difference between effects and confounders](https://s4be.cochrane.org/blog/2015/06/04/difference-effect-modification-confounding/#:~:text=Effect%20modification%20is%20all%20about,onto%20the%20market%2C%20Drug%20X)
+- Effect modification is all about stratification and occurs when an exposure has a different effect among different subgroups. Effect modification is associated with the outcome but not the exposure.
+  - For example, imagine you are testing out a new treatment that has come onto the market, Drug X. If Drug X works in females but does not work in males, this is an example of effect modification.
+- Confounding occurs when a factor is associated with both the exposure and the outcome but does not lie on the causative pathway.
+  - For example, if you decide to look for an association between coffee and lung cancer, this association may be distorted by smoking if smokers are unevenly distributed between the two groups. It may appear that there is an association between coffee and lung cancer, however if you were to consider smokers and non-smokers separately for each group this would in fact show no association.
 Add **covariates V** (which may be non-confounders) in **a marginal structual model** to assess effect modification. 
 
 Example: 
