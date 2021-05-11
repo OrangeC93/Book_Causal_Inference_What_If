@@ -98,6 +98,8 @@ Estimate the model parameters:
 - Note: the vector of **covariates L** needs to include **V** -- even if V is not a confounder -- and any other variables that are needed to ensure exchangeability within levels of V.
 
 Code: [program 12.6](https://github.com/OrangeC93/Book_Causal_Inference_What_If/blob/main/code/chapter12.ipynb)
+
+Reference: https://open.oregonstate.education/epidemiology/chapter/effect-modification/
 ## 12.6 Censoring and missing data
 Selecting only individual with nonmissing outcome values-- that is, censoring from the analysis those with missing values-- may introduce selection bias.
 - Censoring C = 1, if body wight is unmeasured, and 0 if boday weight is measured. 
